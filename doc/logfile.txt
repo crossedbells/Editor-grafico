@@ -1,36 +1,193 @@
-Class documentation
+Project documentation
 <---- javadoc command: ---->
 C:\Program Files\BlueJ\jdk\bin\javadoc.exe
+-sourcepath
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2
+-source
+21
+-classpath
+C:\Program Files\BlueJ\lib\bluejcore.jar;C:\Program Files\BlueJ\lib\javafx-base-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-controls-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-fxml-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-graphics-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-media-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-swing-21.0.3-win.jar;C:\Program Files\BlueJ\lib\javafx-web-21.0.3-win.jar;C:\Program Files\BlueJ\lib\junit-4.12.jar;C:\Program Files\BlueJ\lib\junit-jupiter-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-api-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-params-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-commons-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-engine-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-launcher-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-suite-api-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-vintage-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\hamcrest-core-1.3.jar;C:\Program Files\BlueJ\lib\opentest4j-1.2.0.jar;C:\Program Files\BlueJ\lib\lang-stride.jar;C:\Program Files\BlueJ\lib\javafx\javafx.base.jar;C:\Program Files\BlueJ\lib\javafx\javafx.controls.jar;C:\Program Files\BlueJ\lib\javafx\javafx.fxml.jar;C:\Program Files\BlueJ\lib\javafx\javafx.graphics.jar;C:\Program Files\BlueJ\lib\javafx\javafx.media.jar;C:\Program Files\BlueJ\lib\javafx\javafx.properties.jar;C:\Program Files\BlueJ\lib\javafx\javafx.swing.jar;C:\Program Files\BlueJ\lib\javafx\javafx.web.jar;C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2
+-d
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\doc
+-encoding
+windows-1252
+-charset
+windows-1252
+-doctitle
+Atividade 2
+-windowtitle
+Atividade 2
 -author
 -version
 -nodeprecated
 -package
 -Xdoclint:none
--noindex
--notree
--nohelp
--nonavbar
--source
-11
--classpath
-C:\Program Files\BlueJ\lib\bluejcore.jar;C:\Program Files\BlueJ\lib\junit-4.12.jar;C:\Program Files\BlueJ\lib\junit-jupiter-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-api-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-migrationsupport-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-jupiter-params-5.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-commons-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-console-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-console-standalone-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-engine-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-launcher-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-reporting-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-runner-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-suite-api-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-platform-testkit-1.5.2.jar;C:\Program Files\BlueJ\lib\junit-quickcheck-core-0.9.jar;C:\Program Files\BlueJ\lib\junit-vintage-engine-5.5.2.jar;C:\Program Files\BlueJ\lib\hamcrest-core-1.3.jar;C:\Program Files\BlueJ\lib\hamcrest-library-1.3.jar;C:\Program Files\BlueJ\lib\lang-stride.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.base.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.controls.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.fxml.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.graphics.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.media.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.properties.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.swing.jar;C:\Program Files\BlueJ\lib\javafx\lib\javafx.web.jar;C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos
--d
-C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc
--encoding
-windows-1252
--charset
-windows-1252
-C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\ponto\FiguraPontos.java
+-link
+https://docs.oracle.com/en/java/javase/21/docs/api/
+triangulo
+ponto
+reta
+retangulo
+circulo
+constantes
+janela
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2/App.java
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2/FiguraJsonUtil.java
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2/PainelDesenho.java
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2/Gui.java
 <---- end of javadoc command ---->
-Loading source file C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\ponto\FiguraPontos.java...
+Loading source file C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\App.java...
+Loading source file C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java...
+Loading source file C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\PainelDesenho.java...
+Loading source file C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\Gui.java...
+Loading source files for package triangulo...
+Loading source files for package ponto...
+Loading source files for package reta...
+Loading source files for package retangulo...
+Loading source files for package circulo...
+Loading source files for package constantes...
+Loading source files for package janela...
 Constructing Javadoc information...
-Standard Doclet version 11.0.2
-Building tree for all the packages and classes...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\ponto\FiguraPontos.html...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\ponto\package-summary.html...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\constant-values.html...
-Building index for all the packages and classes...
-Building index for all classes...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\allclasses.html...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\allclasses.html...
-Generating C:\Users\julio\Dropbox\2021\2oSemestre\Aulas\CGPI\Cronograma\Semana6\20210908\Projetos\Primitivos\doc\index.html...
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:1: error: package org.json does not exist
+import org.json.JSONArray;
+               ^
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:2: error: package org.json does not exist
+import org.json.JSONObject;
+               ^
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:3: error: package org.json does not exist
+import org.json.JSONTokener;
+               ^
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:4: error: package org.json does not exist
+import org.json.JSONException;
+               ^
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:18: error: cannot find symbol
+            List<Ponto> pontos,
+                 ^
+  symbol:   class Ponto
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:19: error: cannot find symbol
+            List<Reta> retas,
+                 ^
+  symbol:   class Reta
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:20: error: cannot find symbol
+            List<Circulo> circulos,
+                 ^
+  symbol:   class Circulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:21: error: cannot find symbol
+            List<Triangulo> triangulos,
+                 ^
+  symbol:   class Triangulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:22: error: cannot find symbol
+            List<Retangulo> retangulos,
+                 ^
+  symbol:   class Retangulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:41: error: cannot find symbol
+    public static FigurasContainer lerFiguras(String caminhoArquivo) throws IOException, JSONException {
+                                                                                         ^
+  symbol:   class JSONException
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:57: error: cannot find symbol
+    private static JSONArray pontosToJsonArray(List<Ponto> pontos) {
+                                                    ^
+  symbol:   class Ponto
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:57: error: cannot find symbol
+    private static JSONArray pontosToJsonArray(List<Ponto> pontos) {
+                   ^
+  symbol:   class JSONArray
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:62: error: cannot find symbol
+    private static JSONArray retasToJsonArray(List<Reta> retas) {
+                                                   ^
+  symbol:   class Reta
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:62: error: cannot find symbol
+    private static JSONArray retasToJsonArray(List<Reta> retas) {
+                   ^
+  symbol:   class JSONArray
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:67: error: cannot find symbol
+    private static JSONArray circulosToJsonArray(List<Circulo> circulos) {
+                                                      ^
+  symbol:   class Circulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:67: error: cannot find symbol
+    private static JSONArray circulosToJsonArray(List<Circulo> circulos) {
+                   ^
+  symbol:   class JSONArray
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:72: error: cannot find symbol
+    private static JSONArray triangulosToJsonArray(List<Triangulo> triangulos) {
+                                                        ^
+  symbol:   class Triangulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:72: error: cannot find symbol
+    private static JSONArray triangulosToJsonArray(List<Triangulo> triangulos) {
+                   ^
+  symbol:   class JSONArray
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:77: error: cannot find symbol
+    private static JSONArray retangulosToJsonArray(List<Retangulo> retangulos) {
+                                                        ^
+  symbol:   class Retangulo
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:77: error: cannot find symbol
+    private static JSONArray retangulosToJsonArray(List<Retangulo> retangulos) {
+                   ^
+  symbol:   class JSONArray
+  location: class FiguraJsonUtil
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:85: error: cannot find symbol
+        public final List<Ponto> pontos;
+                          ^
+  symbol:   class Ponto
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:86: error: cannot find symbol
+        public final List<Reta> retas;
+                          ^
+  symbol:   class Reta
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:87: error: cannot find symbol
+        public final List<Circulo> circulos;
+                          ^
+  symbol:   class Circulo
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:88: error: cannot find symbol
+        public final List<Triangulo> triangulos;
+                          ^
+  symbol:   class Triangulo
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:89: error: cannot find symbol
+        public final List<Retangulo> retangulos;
+                          ^
+  symbol:   class Retangulo
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:91: error: cannot find symbol
+        public FigurasContainer(List<Ponto> pontos, List<Reta> retas, List<Circulo> circulos, List<Triangulo> triangulos, List<Retangulo> retangulos) {
+                                     ^
+  symbol:   class Ponto
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:91: error: cannot find symbol
+        public FigurasContainer(List<Ponto> pontos, List<Reta> retas, List<Circulo> circulos, List<Triangulo> triangulos, List<Retangulo> retangulos) {
+                                                         ^
+  symbol:   class Reta
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:91: error: cannot find symbol
+        public FigurasContainer(List<Ponto> pontos, List<Reta> retas, List<Circulo> circulos, List<Triangulo> triangulos, List<Retangulo> retangulos) {
+                                                                           ^
+  symbol:   class Circulo
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:91: error: cannot find symbol
+        public FigurasContainer(List<Ponto> pontos, List<Reta> retas, List<Circulo> circulos, List<Triangulo> triangulos, List<Retangulo> retangulos) {
+                                                                                                   ^
+  symbol:   class Triangulo
+  location: class FigurasContainer
+C:\Users\mogek\Documents\PUC\4\CGPI\Atividade 2\FiguraJsonUtil.java:91: error: cannot find symbol
+        public FigurasContainer(List<Ponto> pontos, List<Reta> retas, List<Circulo> circulos, List<Triangulo> triangulos, List<Retangulo> retangulos) {
+                                                                                                                               ^
+  symbol:   class Retangulo
+  location: class FigurasContainer
+30 errors
