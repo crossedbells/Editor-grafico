@@ -86,4 +86,11 @@ public class RetanguloGraf extends Retangulo {
         lado3.desenharRetaLib(g);
         lado4.desenharRetaLib(g);
     }
+    
+    /**
+     * Atualiza o ponto p2 (canto oposto) do retângulo gráfico.
+     */
+    public void atualizarP2(int x, int y) {
+        super.atualizarP2(x, y);
+    }
 }

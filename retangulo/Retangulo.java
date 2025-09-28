@@ -109,4 +109,13 @@ public class Retangulo {
     public Ponto getP4() {
         return p4;
     }
+
+    /**
+     * Atualiza o ponto p2 (canto oposto) do retângulo e recalcula os outros cantos.
+     */
+    public void atualizarP2(int x, int y) {
+        this.p2.setX(x);
+        this.p2.setY(y);
+        calcularP3P4();
+    }
 }

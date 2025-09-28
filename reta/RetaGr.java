@@ -2,7 +2,6 @@ package reta;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import ponto.PontoGr;
 
 /**
@@ -236,9 +235,9 @@ public class RetaGr extends Reta{
                 pFim = p1.getY();            
             }
             // percorre de y1 ate y2. 
-            // x e´ calculado pela equacao: x = (y - b) / m
+            // x eï¿½ calculado pela equacao: x = (y - b) / m
             for(y = pIni; y <= pFim; ++y){ // percorre de y1 ate y2
-                // x1 e x2 são iguais
+                // x1 e x2 sï¿½o iguais
                 x = p1.getX(); // ou x = p2.getX()
 
                 // Define ponto grafico
@@ -266,7 +265,7 @@ public class RetaGr extends Reta{
                 }
 
                 // percorre de x1 ate x2. 
-                // y e´ calculado pela equacao: y = mx + b
+                // y eï¿½ calculado pela equacao: y = mx + b
                 for(x = pIni; x <= pFim; ++x){ 
                     // Calculo de y pela equacao da reta
                     y = (m*x + b);
@@ -291,7 +290,7 @@ public class RetaGr extends Reta{
                     pFim = p1.getY();            
                 }
                 // percorre de y1 ate y2. 
-                // x e´ calculado pela equacao: x = (y - b) / m
+                // x eï¿½ calculado pela equacao: x = (y - b) / m
                 for(y = pIni; y <= pFim; ++y){ // percorre de y1 ate y2
                     // Calculo de x pela equacao da reta
                     x = ((y - b)/m);
@@ -387,5 +386,13 @@ public class RetaGr extends Reta{
         }
     }
 
+    /**
+     * Atualiza dinamicamente o ponto final da reta (para efeito elÃ¡stico).
+     * @param x2 Nova coordenada x do ponto final.
+     * @param y2 Nova coordenada y do ponto final.
+     */
+    public void atualizarPontoFinal(int x2, int y2) {
+        this.p2.setX(x2);
+        this.p2.setY(y2);
+    }
 }
-

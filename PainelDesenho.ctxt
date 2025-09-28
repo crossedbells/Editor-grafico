@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=PainelDesenho
-comment0.text=\r\n\ Implementa\ os\ eventos\ de\ mouse\ para\ desenhar\ primitivos,\ armazenar\ o\ hist\u00F3rico\r\n\ de\ desenhos\ e\ permitir\ salvar/carregar.\r\n\ *\ @author\ (Seu\ Nome,\ adaptado\ de\ Julio\ Arakaki)\r\n\ @version\ (Data\ Atual)\r\n
+comment0.text=\r\n\ Implementa\ os\ eventos\ de\ mouse\ para\ desenhar\ primitivos,\ armazenar\ o\ hist?rico\r\n\ de\ desenhos\ e\ permitir\ salvar/carregar.\r\n\ *\ @author\ (Seu\ Nome,\ adaptado\ de\ Julio\ Arakaki)\r\n\ @version\ (Data\ Atual)\r\n
 comment1.params=msg\ tipo\ corAtual\ esp
 comment1.target=PainelDesenho(javax.swing.JLabel,\ constantes.TipoPrimitivo,\ java.awt.Color,\ int)
 comment1.text=\r\n\ Construtor\ para\ objetos\ da\ classe\ PainelDesenho\r\n

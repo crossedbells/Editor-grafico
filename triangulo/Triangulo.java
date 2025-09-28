@@ -141,4 +141,28 @@ public class Triangulo {
     public void setP3(Ponto p3) {
         this.p3 = p3;
     }
+
+    /**
+     * Atualiza o primeiro vértice do triângulo.
+     */
+    public void atualizarP1(int x, int y) {
+        this.p1.setX(x);
+        this.p1.setY(y);
+    }
+
+    /**
+     * Atualiza o segundo vértice do triângulo.
+     */
+    public void atualizarP2(int x, int y) {
+        this.p2.setX(x);
+        this.p2.setY(y);
+    }
+
+    /**
+     * Atualiza o terceiro vértice do triângulo.
+     */
+    public void atualizarP3(int x, int y) {
+        this.p3.setX(x);
+        this.p3.setY(y);
+    }
 }

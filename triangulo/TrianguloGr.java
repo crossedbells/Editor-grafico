@@ -78,4 +78,25 @@ public class TrianguloGr extends Triangulo {
         lado2.desenharRetaLib(g);
         lado3.desenharRetaLib(g); 
     }
+
+    /**
+     * Atualiza o primeiro vértice do triângulo gráfico.
+     */
+    public void atualizarP1(int x, int y) {
+        super.atualizarP1(x, y);
+    }
+
+    /**
+     * Atualiza o segundo vértice do triângulo gráfico.
+     */
+    public void atualizarP2(int x, int y) {
+        super.atualizarP2(x, y);
+    }
+
+    /**
+     * Atualiza o terceiro vértice do triângulo gráfico.
+     */
+    public void atualizarP3(int x, int y) {
+        super.atualizarP3(x, y);
+    }
 }

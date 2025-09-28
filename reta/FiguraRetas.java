@@ -1,9 +1,8 @@
 package reta;
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import constantes.Constantes;
 import janela.Janela;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import ponto.Ponto;
 
 /**
@@ -133,6 +132,16 @@ public class FiguraRetas {
                     (int) (Math.random() * 256));
             RetaGr r = new RetaGr(x1, y1, x2, y2, cor, "", esp);
             r.desenharRetaMp(g);
+        }
+    }
+    /**
+     * Desenha uma reta elástica (drag and draw) usando um objeto RetaGr já existente.
+     * @param g Graphics2D
+     * @param reta RetaGr (com os pontos já atualizados)
+     */
+    public static void desenharRetaElastica(Graphics2D g, RetaGr reta) {
+        if (reta != null) {
+            reta.desenharRetaLib(g);
         }
     }
 }
