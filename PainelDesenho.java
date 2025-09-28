@@ -43,6 +43,8 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     private RetaGr retaElastica = null;
     private TrianguloGraf trianguloElastico = null;
     private RetanguloGraf retanguloElastico = null;
+    private CirculoGr circuloElastico = null;
+    private boolean desenhandoCirculo = false;
     private int trianguloEstado = 0; // 0: aguardando p1, 1: aguardando p2, 2: aguardando p3
 
     public PainelDesenho(JLabel msg, TipoPrimitivo tipo, Color corAtual, int esp) {
@@ -90,19 +92,14 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             y1 = e.getY();
             // Cria o retângulo elástico com os dois pontos iguais
             retanguloElastico = new RetanguloGraf(new Ponto(x1, y1), new Ponto(x1, y1), getCorAtual(), getEsp());
-        } else if (tipo == TipoPrimitivo.CIRCULO_EQ || tipo == TipoPrimitivo.CIRCULO_MP || tipo == TipoPrimitivo.CIRCULO_LIB) {
-            if (cliques == 0) {
-                x1 = e.getX();
-                y1 = e.getY();
-                cliques++;
-            } else {
-                x2 = e.getX();
-                y2 = e.getY();
-                int raio = (int) Math.sqrt(Math.pow((y2 - y1), 2) + Math.pow((x2 - x1), 2));
-                formas.add(new CirculoGr(x1, y1, raio, getCorAtual(), "", getEsp()));
-                desfeitas.clear();
-                cliques = 0;
-            }
+        } else if (tipo == TipoPrimitivo.CIRCULO_EQ ||
+                   tipo == TipoPrimitivo.CIRCULO_MP ||
+                   tipo == TipoPrimitivo.CIRCULO_LIB) {
+            x1 = e.getX();
+            y1 = e.getY();
+            // Cria o círculo elástico com raio 0
+            circuloElastico = new CirculoGr(x1, y1, 0, getCorAtual(), "", getEsp());
+            desenhandoCirculo = true;
         } else if (tipo == TipoPrimitivo.TRIANGULO) {
             if (trianguloEstado == 0) {
                 x1 = e.getX();
@@ -152,6 +149,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
             retanguloElastico.atualizarP2(e.getX(), e.getY());
             repaint();
+        } else if ((tipo == TipoPrimitivo.CIRCULO_EQ ||
+                     tipo == TipoPrimitivo.CIRCULO_MP ||
+                     tipo == TipoPrimitivo.CIRCULO_LIB) && circuloElastico != null && desenhandoCirculo) {
+            circuloElastico.atualizarRaio(e.getX(), e.getY());
+            repaint();
         }
     }
 
@@ -186,6 +188,17 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             retanguloElastico = null;
             desfeitas.clear();
             repaint();
+        } else if (tipo == TipoPrimitivo.CIRCULO_EQ || tipo == TipoPrimitivo.CIRCULO_MP || tipo == TipoPrimitivo.CIRCULO_LIB) {
+            if (desenhandoCirculo && circuloElastico != null) {
+                x2 = e.getX();
+                y2 = e.getY();
+                circuloElastico.atualizarRaio(x2, y2);
+                formas.add(circuloElastico);
+                circuloElastico = null;
+                desenhandoCirculo = false;
+                desfeitas.clear();
+                repaint();
+            }
         }
     }
 
@@ -203,6 +216,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
         if (trianguloElastico != null) {
             trianguloElastico.desenharTriangulo(g2d);
+        }
+        if (circuloElastico != null && desenhandoCirculo) {
+            circuloElastico.desenharCirculoLib(g2d);
         }
     }
 

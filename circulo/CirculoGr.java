@@ -2,7 +2,6 @@ package circulo;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import ponto.PontoGr;
 
 /**
@@ -137,8 +136,8 @@ public class CirculoGr extends Circulo {
         double alfa = 0;
 
         // percorre de 0  ate 45. 
-        // x e´ calculado pela equacao: x = xc + R*seno(alfa)
-        // y e´ calculado pela equacao: y = yc + R*cos(alfa)
+        // x eï¿½ calculado pela equacao: x = xc + R*seno(alfa)
+        // y eï¿½ calculado pela equacao: y = yc + R*cos(alfa)
         for(alfa = angIni; alfa <= angFim; alfa = alfa + incr){ 
             // Calculo de x e y (por trigonometria)
             x = getRaio() * Math.sin((alfa*Math.PI)/180.);
@@ -182,7 +181,7 @@ public class CirculoGr extends Circulo {
 
     /**
      * Desenha os pontos simetricos do circulo. Um em cada octante
-     * @param g - componente para acessar modo gráfico
+     * @param g - componente para acessar modo grï¿½fico
      * @param x - coordenada x de um ponto do primeiro octante do circulo
      * @param y - coordenada y de um ponto do primeiro octante do circulo
      * @param ponto - objeto utilizado para "acender" (desenhar) um ponto
@@ -221,7 +220,7 @@ public class CirculoGr extends Circulo {
 
 
     /**
-     * Método desenharPontoSimetrico
+     * Mï¿½todo desenharPontoSimetrico
      *
      * @param x coordenada x
      * @param y coordenda y
@@ -232,5 +231,12 @@ public class CirculoGr extends Circulo {
         ponto.setX(x);
         ponto.setY(y);
         ponto.desenharPonto(g);
+    }
+
+    /**
+     * Atualiza o raio do cÃ­rculo grÃ¡fico com base em um ponto na borda.
+     */
+    public void atualizarRaio(int x, int y) {
+        super.atualizarRaio(x, y);
     }
 }

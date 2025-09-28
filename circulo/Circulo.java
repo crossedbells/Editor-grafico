@@ -79,4 +79,15 @@ public class Circulo {
         String s = "Circulo: \n Centro: " + getCentro().toString() + " Raio: " + getRaio();
         return s;
     }
+
+    /**
+     * Atualiza o raio do círculo com base em um ponto na borda.
+     * @param x Posição x do mouse (borda)
+     * @param y Posição y do mouse (borda)
+     */
+    public void atualizarRaio(int x, int y) {
+        double dx = x - getCentro().getX();
+        double dy = y - getCentro().getY();
+        setRaio(Math.sqrt(dx*dx + dy*dy));
+    }
 }
