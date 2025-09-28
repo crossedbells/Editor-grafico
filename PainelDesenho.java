@@ -45,7 +45,8 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     private RetanguloGraf retanguloElastico = null;
     private CirculoGr circuloElastico = null;
     private boolean desenhandoCirculo = false;
-    private int trianguloEstado = 0; // 0: aguardando p1, 1: aguardando p2, 2: aguardando p3
+    private boolean desenhandoTriangulo = false;
+    private int estadoTriangulo = 0; // 0: aguardando p1, 1: aguardando p2, 2: aguardando p3
 
     public PainelDesenho(JLabel msg, TipoPrimitivo tipo, Color corAtual, int esp) {
         setTipo(tipo);
@@ -101,26 +102,30 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             circuloElastico = new CirculoGr(x1, y1, 0, getCorAtual(), "", getEsp());
             desenhandoCirculo = true;
         } else if (tipo == TipoPrimitivo.TRIANGULO) {
-            if (trianguloEstado == 0) {
+            if (estadoTriangulo == 0) {
                 x1 = e.getX();
                 y1 = e.getY();
-                // Inicializa todos os pontos iguais
-                trianguloElastico = new TrianguloGraf(new Ponto(x1, y1), new Ponto(x1, y1), new Ponto(x1, y1), getCorAtual(), getEsp());
-                trianguloEstado = 1;
-            } else if (trianguloEstado == 1) {
-                // Fixa o segundo ponto
+                trianguloElastico = new TrianguloGraf(
+                    new Ponto(x1, y1),
+                    new Ponto(x1, y1),
+                    new Ponto(x1, y1),
+                    getCorAtual(),
+                    getEsp()
+                );
+                estadoTriangulo = 1;
+            } else if (estadoTriangulo == 1) {
                 x2 = e.getX();
                 y2 = e.getY();
                 trianguloElastico.atualizarP2(x2, y2);
-                trianguloEstado = 2;
-            } else if (trianguloEstado == 2) {
-                // Fixa o terceiro ponto e finaliza
+                trianguloElastico.atualizarP3(x2, y2); // p3 ainda não definido, mas evita lixo visual
+                estadoTriangulo = 2;
+            } else if (estadoTriangulo == 2) {
                 x3 = e.getX();
                 y3 = e.getY();
                 trianguloElastico.atualizarP3(x3, y3);
                 formas.add(trianguloElastico);
                 trianguloElastico = null;
-                trianguloEstado = 0;
+                estadoTriangulo = 0;
                 desfeitas.clear();
             }
         }
@@ -137,12 +142,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             retaElastica.atualizarPontoFinal(x2, y2);
             repaint();
         } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null) {
-            if (trianguloEstado == 1) {
-                // p2 e p3 seguem o mouse, formando um triângulo "achatado"
+            if (estadoTriangulo == 1) {
+                // Antes do segundo clique: reta elástica p1-p2, p3 igual a p1
                 trianguloElastico.atualizarP2(e.getX(), e.getY());
-                trianguloElastico.atualizarP3(e.getX(), e.getY());
-            } else if (trianguloEstado == 2) {
-                // p3 segue o mouse, p1 e p2 já estão fixos
+                trianguloElastico.atualizarP3(x1, y1);
+            } else if (estadoTriangulo == 2) {
+                // Após o segundo clique: triângulo elástico, p3 segue o mouse
                 trianguloElastico.atualizarP3(e.getX(), e.getY());
             }
             repaint();
@@ -159,6 +164,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        // Não faz nada para triângulo aqui, só nos cliques!
         if ((tipo == TipoPrimitivo.RETA_EQ ||
              tipo == TipoPrimitivo.RETA_MP ||
              tipo == TipoPrimitivo.RETA_LIB) && retaElastica != null) {
@@ -167,20 +173,6 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             retaElastica.atualizarPontoFinal(x2, y2);
             formas.add(retaElastica);
             retaElastica = null;
-            repaint();
-        } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null) {
-            if (trianguloEstado == 1) {
-                // Apenas fixa p2, NÃO adiciona à lista ainda!
-                trianguloElastico.atualizarP2(e.getX(), e.getY());
-                trianguloEstado = 2;
-            } else if (trianguloEstado == 2) {
-                // Fixa p3 e agora sim adiciona à lista
-                trianguloElastico.atualizarP3(e.getX(), e.getY());
-                formas.add(trianguloElastico);
-                trianguloElastico = null;
-                trianguloEstado = 0;
-                desfeitas.clear();
-            }
             repaint();
         } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
             retanguloElastico.atualizarP2(e.getX(), e.getY());
