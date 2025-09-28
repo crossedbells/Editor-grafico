@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=App
+comment0.text=\r\n\ Aplicacao\ para\ testar\ primitivos\ graficos.\r\n\ \r\n\ @author\ Amora\ Marinho\ Machado\r\n\ @author\ Gabriel\ Azevedo\ Cruz\r\n\ @author\ Gabriel\ Mechi\ Lima\r\n\ @author\ Luiz\ Fernando\ de\ Marchi\ Andrade\r\n\ @version\ 05/09/2025\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ Programa\ principal.\ Ativa\ a\ UI\ da\ aplicacao,\ definindo\ a\ largura\ e\ altura\ da\ janela.\r\n\ \r\n\ @param\ args\ vetor\ de\ strings\ de\ par\u00EF\u00BF\u00BDmetros\ de\ entrada\r\n
+numComments=2

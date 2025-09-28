@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=TestaCirculo
+comment0.text=\r\n\ Teste\ de\ circulos.\r\n\r\n\ @author\ Julio\ Arakaki\r\n\ @version\ 12/09/2021\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ @param\ args\ parametros\ externos\r\n
+numComments=2

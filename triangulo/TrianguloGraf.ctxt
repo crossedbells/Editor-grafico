@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=TrianguloGraf
+comment0.text=\r\n\ Classe\ para\ representar\ um\ tri\u00C3\u00A2ngulo\ gr\u00C3\u00A1fico.\r\n\ Herda\ de\ Triangulo\ e\ adiciona\ propriedades\ de\ desenho.\r\n\ @author\ (Seu\ nome)\r\n\ @version\ (Data)\r\n
+comment1.params=p1\ p2\ p3\ cor\ espessura
+comment1.target=TrianguloGraf(ponto.Ponto,\ ponto.Ponto,\ ponto.Ponto,\ java.awt.Color,\ int)
+comment1.text=\r\n\ Construtor\ que\ recebe\ tr\u00C3\u00AAs\ pontos\ e\ atributos\ gr\u00C3\u00A1ficos.\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getCor()
+comment3.params=
+comment3.target=int\ getEspessura()
+comment4.params=g
+comment4.target=void\ desenharTriangulo(java.awt.Graphics2D)
+comment4.text=\r\n\ Desenha\ o\ tri\u00C3\u00A2ngulo\ no\ contexto\ gr\u00C3\u00A1fico\ fornecido,\ utilizando\ 3\ objetos\ RetaGr.\r\n\ @param\ g\ Objeto\ Graphics2D\ para\ desenhar.\r\n
+numComments=5

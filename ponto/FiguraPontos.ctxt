@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=FiguraPontos
+comment0.text=\r\n\ Implementacao\ de\ metodos\ estaticos\ para\ desenhar\ ponto.\r\n\ \r\n\ @author\ Julio\ Arakaki\r\n\ \r\n\ @version\ 07/09/2021\r\n
+comment1.params=g\ x\ y\ nome\ diametro\ cor
+comment1.target=void\ desenharPontoWind(java.awt.Graphics2D,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment1.text=\r\n\ Desenha\ ponto\ na\ window\ (area\ de\ desenho)\r\n\ \r\n\ @param\ g\ Graphics\ biblioteca\ grafica\ do\ java\r\n\ @param\ x\ int\ coordenada\ x\ do\ ponto\r\n\ @param\ y\ int\ coordenada\ y\ do\ ponto\r\n\ @param\ nome\ String\ nome\ do\ ponto\r\n\ @param\ diametro\ int\ espessura\ do\ ponto\ (diametro)\r\n\ @param\ cor\ Color\ cor\ do\ ponto\r\n
+comment2.params=g\ window\ viewport\ x\ y\ nome\ diametro\ cor
+comment2.target=void\ desenharPontoViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment2.text=\r\n\ Desenha\ ponto\ numa\ viewport.\ Utiliza\ window\ e\ viwport\ recebidos\ como\ pametros.\r\n\ \r\n\ @param\ g\ Graphics\ biblioteca\ grafica\ do\ java\r\n\ @param\ window\ janela\ de\ desenho\ \r\n\ @param\ viewport\ janela\ de\ visualizacao\r\n\ @param\ x\ int\ coordenada\ x\ do\ ponto\r\n\ @param\ y\ int\ coordenada\ y\ do\ ponto\r\n\ @param\ nome\ String\ nome\ do\ ponto\r\n\ @param\ diametro\ int\ espessura\ do\ ponto\ (diametro)\r\n
+comment3.params=g\ qtde\ larg
+comment3.target=void\ desenharPontos(java.awt.Graphics2D,\ int,\ int)
+comment3.text=\r\n\ Desenha\ varios\ pontos\ na\ janela\ de\ desenho\r\n\ \r\n\ @param\ g\ biblioteca\ grafica\ do\ java\r\n\ @param\ qtde\ quantidade\ de\ pontos\ a\ ser\ desenhado\r\n\ @param\ larg\ largura\ do\ ponto\r\n
+numComments=4

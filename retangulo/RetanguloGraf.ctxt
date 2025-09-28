@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=RetanguloGraf
+comment0.text=\r\n\ Representa\ um\ ret\u00C3\u00A2ngulo\ gr\u00C3\u00A1fico.\r\n\ <p>\r\n\ Esta\ classe\ herda\ de\ {@link\ Retangulo},\ adicionando\ atributos\ gr\u00C3\u00A1ficos\ como\r\n\ cor\ e\ espessura\ da\ linha,\ al\u00C3\u00A9m\ do\ m\u00C3\u00A9todo\ para\ desenhar\ o\ ret\u00C3\u00A2ngulo\ na\ tela.\r\n\ </p>\r\n\r\n\ <p>O\ ret\u00C3\u00A2ngulo\ \u00C3\u00A9\ desenhado\ utilizando\ quatro\ inst\u00C3\u00A2ncias\ da\ classe\ {@link\ RetaGr},\r\n\ que\ representam\ cada\ lado\ do\ ret\u00C3\u00A2ngulo.</p>\r\n\r\n\ <p>Exemplo\ de\ uso\:</p>\r\n\ <pre>\r\n\ \ \ \ \ Ponto\ p1\ \=\ new\ Ponto(10,\ 20);\r\n\ \ \ \ \ Ponto\ p2\ \=\ new\ Ponto(100,\ 80);\r\n\ \ \ \ \ RetanguloGraf\ ret\ \=\ new\ RetanguloGraf(p1,\ p2,\ Color.RED,\ 3);\r\n\ \ \ \ \ ret.desenharRetangulo(g);\r\n\ </pre>\r\n\r\n\ Nesse\ exemplo,\ um\ ret\u00C3\u00A2ngulo\ vermelho\ com\ espessura\ 3\ ser\u00C3\u00A1\ desenhado\r\n\ no\ contexto\ gr\u00C3\u00A1fico\ {@code\ g}.\r\n\r\n\ @author\ Seu\ Nome\r\n\ @version\ 1.0\r\n
+comment1.params=p1\ p2\ cor\ espessura
+comment1.target=RetanguloGraf(ponto.Ponto,\ ponto.Ponto,\ java.awt.Color,\ int)
+comment1.text=\r\n\ Constr\u00C3\u00B3i\ um\ ret\u00C3\u00A2ngulo\ gr\u00C3\u00A1fico\ a\ partir\ de\ dois\ pontos\ opostos,\r\n\ definindo\ tamb\u00C3\u00A9m\ a\ cor\ e\ a\ espessura\ da\ linha.\r\n\r\n\ @param\ p1\ \ \ \ \ \ \ \ um\ dos\ cantos\ do\ ret\u00C3\u00A2ngulo\r\n\ @param\ p2\ \ \ \ \ \ \ \ o\ canto\ oposto\ ao\ {@code\ p1}\r\n\ @param\ cor\ \ \ \ \ \ \ a\ cor\ da\ linha\ do\ ret\u00C3\u00A2ngulo\r\n\ @param\ espessura\ a\ espessura\ da\ linha\ do\ ret\u00C3\u00A2ngulo\r\n
+comment2.params=
+comment2.target=java.awt.Color\ getCor()
+comment3.params=
+comment3.target=int\ getEspessura()
+comment4.params=g
+comment4.target=void\ desenharRetangulo(java.awt.Graphics2D)
+comment4.text=\r\n\ Desenha\ o\ ret\u00C3\u00A2ngulo\ no\ contexto\ gr\u00C3\u00A1fico\ fornecido.\r\n\ <p>\r\n\ O\ desenho\ \u00C3\u00A9\ feito\ utilizando\ quatro\ objetos\ {@link\ RetaGr},\r\n\ cada\ um\ representando\ um\ dos\ lados\ do\ ret\u00C3\u00A2ngulo.\r\n\ </p>\r\n\r\n\ @param\ g\ o\ objeto\ {@code\ Graphics2D}\ usado\ para\ desenhar\r\n
+numComments=5

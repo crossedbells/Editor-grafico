@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=FiguraCirculos
+comment0.text=\r\n\ Desenhar\ figuras\ com\ circulo.\r\n\ \r\n\ @author\ Julio\ Arakaki\r\n\ @version\ 27/08/2021\r\n
+comment1.params=g\ xc\ yc\ raio\ nome\ esp\ cor
+comment1.target=void\ desenharCirculoLib(java.awt.Graphics2D,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment1.text=\r\n\ Desenha\ circulo\ utilizando\ funcao\ de\ biblioteca\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment2.params=g\ xc\ yc\ raio\ nome\ esp\ cor
+comment2.target=void\ desenharCirculoEq(java.awt.Graphics2D,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment2.text=\r\n\ Desenha\ circulo\ utilizando\ equacoes\ parametricas\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment3.params=g\ xc\ yc\ raio\ nome\ esp\ cor
+comment3.target=void\ desenharCirculoMp(java.awt.Graphics2D,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment3.text=\r\n\ Desenha\ circulo\ na\ window\ utilizando\ algoritmo\ midpoint\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment4.params=g\ window\ viewport\ xc\ yc\ raio\ nome\ esp\ cor
+comment4.target=void\ desenharCirculoLibViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment4.text=\r\n\ Desenha\ circulo\ na\ viewport\ utilizando\ a\ funcao\ de\ biblioteca\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ window\ dimensoes\ da\ window\r\n\ @param\ viewport\ dimensoes\ da\ viewport\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment5.params=g\ window\ viewport\ xc\ yc\ raio\ nome\ esp\ cor
+comment5.target=void\ desenharCirculoEqViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment5.text=\r\n\ Desenha\ circulo\ na\ viewport\ utilizando\ a\ equacao\ parametrica\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ window\ dimensoes\ da\ window\r\n\ @param\ viewport\ dimensoes\ da\ viewport\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment6.params=g\ window\ viewport\ xc\ yc\ raio\ nome\ esp\ cor
+comment6.target=void\ desenharCirculoMpViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment6.text=\r\n\ Desenha\ circulo\ com\ o\ algoritmo\ midpoint\ na\ viewport\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ window\ dimensoes\ da\ window\r\n\ @param\ viewport\ dimensoes\ da\ viewport\r\n\ @param\ xc\ coordenada\ x\ do\ centro\r\n\ @param\ yc\ coordenada\ y\ do\ centro\r\n\ @param\ raio\ raio\ do\ circulo\r\n\ @param\ nome\ nome\ do\ circulo\r\n\ @param\ esp\ espessura\ da\ borda\r\n\ @param\ cor\ cor\ do\ circulo\r\n
+comment7.params=g\ qtde\ esp
+comment7.target=void\ desenharCirculos(java.awt.Graphics2D,\ int,\ int)
+comment7.text=\r\n\ Desenha\ varios\ circulos\r\n\ \r\n\ @param\ g\ Biblioteca\ gr\u00E1fica\r\n\ @param\ qtde\ quantidade\ de\ circulos\r\n\ @param\ esp\ espessura\ da\ borda\ do\ circulo\r\n
+numComments=8

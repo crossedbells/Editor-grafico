@@ -1,0 +1,28 @@
+#BlueJ class context
+comment0.target=Retangulo
+comment0.text=\r\n\ Representa\ um\ ret\u00C3\u00A2ngulo\ definido\ por\ dois\ pontos\ opostos\ (p1\ e\ p2).\r\n\ A\ partir\ desses\ pontos,\ os\ outros\ dois\ cantos\ (p3\ e\ p4)\ s\u00C3\u00A3o\ calculados\r\n\ automaticamente,\ formando\ um\ ret\u00C3\u00A2ngulo\ alinhado\ aos\ eixos\ cartesianos.\r\n\ \r\n\ <p>Exemplo\ de\ uso\:</p>\r\n\ <pre>\r\n\ \ \ \ \ Ponto\ p1\ \=\ new\ Ponto(0,\ 0);\r\n\ \ \ \ \ Ponto\ p2\ \=\ new\ Ponto(4,\ 3);\r\n\ \ \ \ \ Retangulo\ r\ \=\ new\ Retangulo(p1,\ p2);\r\n\ </pre>\r\n\ \r\n\ Nesse\ exemplo,\ o\ ret\u00C3\u00A2ngulo\ \u00C3\u00A9\ formado\ pelos\ pontos\ (0,0),\ (4,3),\ (0,3)\ e\ (4,0).\r\n\ \r\n\ @author\ Seu\ Nome\r\n\ @version\ 1.0\r\n
+comment1.params=p1\ p2
+comment1.target=Retangulo(ponto.Ponto,\ ponto.Ponto)
+comment1.text=\r\n\ Constr\u00C3\u00B3i\ um\ ret\u00C3\u00A2ngulo\ a\ partir\ de\ dois\ pontos\ opostos.\r\n\ Os\ outros\ dois\ cantos\ s\u00C3\u00A3o\ calculados\ automaticamente.\r\n\r\n\ @param\ p1\ um\ dos\ cantos\ do\ ret\u00C3\u00A2ngulo\r\n\ @param\ p2\ o\ canto\ oposto\ a\ {@code\ p1}\r\n
+comment2.params=
+comment2.target=void\ calcularP3P4()
+comment2.text=\r\n\ Calcula\ os\ pontos\ {@code\ p3}\ e\ {@code\ p4}\ com\ base\ em\ {@code\ p1}\ e\ {@code\ p2}.\r\n\ <ul>\r\n\ \ \ <li>{@code\ p3}\ ter\u00C3\u00A1\ a\ coordenada\ X\ de\ {@code\ p1}\ e\ a\ coordenada\ Y\ de\ {@code\ p2}.</li>\r\n\ \ \ <li>{@code\ p4}\ ter\u00C3\u00A1\ a\ coordenada\ X\ de\ {@code\ p2}\ e\ a\ coordenada\ Y\ de\ {@code\ p1}.</li>\r\n\ </ul>\r\n
+comment3.params=
+comment3.target=ponto.Ponto\ getP1()
+comment3.text=\r\n\ Retorna\ o\ ponto\ {@code\ p1}.\r\n\r\n\ @return\ o\ ponto\ {@code\ p1}\r\n
+comment4.params=p1
+comment4.target=void\ setP1(ponto.Ponto)
+comment4.text=\r\n\ Define\ o\ ponto\ {@code\ p1}\ e\ recalcula\ os\ outros\ cantos\ do\ ret\u00C3\u00A2ngulo.\r\n\r\n\ @param\ p1\ o\ novo\ ponto\ {@code\ p1}\r\n
+comment5.params=
+comment5.target=ponto.Ponto\ getP2()
+comment5.text=\r\n\ Retorna\ o\ ponto\ {@code\ p2}.\r\n\r\n\ @return\ o\ ponto\ {@code\ p2}\r\n
+comment6.params=p2
+comment6.target=void\ setP2(ponto.Ponto)
+comment6.text=\r\n\ Define\ o\ ponto\ {@code\ p2}\ e\ recalcula\ os\ outros\ cantos\ do\ ret\u00C3\u00A2ngulo.\r\n\r\n\ @param\ p2\ o\ novo\ ponto\ {@code\ p2}\r\n
+comment7.params=
+comment7.target=ponto.Ponto\ getP3()
+comment7.text=\r\n\ Retorna\ o\ ponto\ {@code\ p3},\ calculado\ automaticamente.\r\n\r\n\ @return\ o\ ponto\ {@code\ p3}\r\n
+comment8.params=
+comment8.target=ponto.Ponto\ getP4()
+comment8.text=\r\n\ Retorna\ o\ ponto\ {@code\ p4},\ calculado\ automaticamente.\r\n\r\n\ @return\ o\ ponto\ {@code\ p4}\r\n
+numComments=9

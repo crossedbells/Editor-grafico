@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=FiguraRetas
+comment0.text=\r\n\ Desenha\ figuras\ com\ retas.\r\n\ \r\n\ @author\ Julio\ Arakaki\r\n\ @version\ (10/09/2021\r\n
+comment1.params=g\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment1.target=void\ desenharRetaLib(java.awt.Graphics2D,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment1.text=\r\n\ @param\ g\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment2.params=g\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment2.target=void\ desenharRetaEq(java.awt.Graphics2D,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment2.text=\r\n\ @param\ g\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment3.params=g\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment3.target=void\ desenharRetaMp(java.awt.Graphics2D,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment3.text=\r\n\ @param\ g\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment4.params=g\ window\ viewport\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment4.target=void\ desenharRetaLibViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment4.text=\r\n\ @param\ g\r\n\ @param\ window\r\n\ @param\ viewport\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment5.params=g\ window\ viewport\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment5.target=void\ desenharRetaEqViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment5.text=\r\n\ @param\ g\r\n\ @param\ window\r\n\ @param\ viewport\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment6.params=g\ window\ viewport\ x1\ y1\ x2\ y2\ nome\ esp\ cor
+comment6.target=void\ desenharRetaMpViewp(java.awt.Graphics2D,\ janela.Janela,\ janela.Janela,\ int,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.awt.Color)
+comment6.text=\r\n\ @param\ g\r\n\ @param\ window\r\n\ @param\ viewport\r\n\ @param\ x1\r\n\ @param\ y1\r\n\ @param\ x2\r\n\ @param\ y2\r\n\ @param\ nome\r\n\ @param\ esp\r\n\ @param\ cor\r\n
+comment7.params=g\ qtde\ esp
+comment7.target=void\ desenharRetas(java.awt.Graphics2D,\ int,\ int)
+comment7.text=\r\n\ @param\ g\r\n\ @param\ qtde\r\n\ @param\ esp\r\n
+numComments=8
