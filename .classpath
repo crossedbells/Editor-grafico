@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="C:/Users/mogek/Documents/json-20230618.jar"/>
+	<classpathentry kind="scr" path="C:/Users/mogek/Documents/json-20230618.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
