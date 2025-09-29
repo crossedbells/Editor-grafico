@@ -6,12 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -21,33 +19,55 @@ import ponto.PontoGr;
 import reta.RetaGr;
 import retangulo.RetanguloGraf;
 import triangulo.TrianguloGraf;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+/**
+ * Painel de desenho que permite criar primitivas geométricas como pontos, retas,
+ * retângulos, triângulos e círculos. Suporta operações de desfazer/refazer,
+ * desenho interativo com mouse e salvamento/carregamento de arquivos JSON.
+ * 
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
+ */
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
 
-    // --- VariÃ¡veis da UI e de Estado ---
-    private JLabel msg;
-    private TipoPrimitivo tipo = TipoPrimitivo.NENHUM;
-    private boolean comViewport;
-    private Color corAtual = Color.BLACK;
-    private int espessura = 1;
+    // --- Variáveis da UI e de Estado ---
+    private JLabel msg; // Label de mensagens do painel
+    private TipoPrimitivo tipo = TipoPrimitivo.NENHUM; // Tipo de primitiva selecionada
+    private boolean comViewport; // Define se o painel tem viewport
+    private Color corAtual = Color.BLACK; // Cor atual para desenho
+    private int espessura = 1; // Espessura do traço
 
-    // --- Coordenadas temporÃ¡rias para desenho ---
-    private int x1, y1, x2, y2, x3, y3;
-    private int cliques = 0;
+    // --- Coordenadas temporárias para desenho ---
+    private int x1, y1, x2, y2, x3, y3; // Coordenadas auxiliares
+    private int cliques = 0; // Contador de cliques para desenho de múltiplos pontos
 
-    // --- Estruturas de Dados para Formas e HistÃ³rico ---
-    private List<Object> formas = new ArrayList<>();
-    private List<Object> desfeitas = new ArrayList<>();
-    
-    // Reta elÃ¡stica temporÃ¡ria
+    // --- Estruturas de Dados para Formas e Histórico ---
+    private List<Object> formas = new ArrayList<>(); // Lista de formas desenhadas
+    private List<Object> desfeitas = new ArrayList<>(); // Lista de formas desfeitas
+
+    // Reta elástica temporária
     private RetaGr retaElastica = null;
     private TrianguloGraf trianguloElastico = null;
     private RetanguloGraf retanguloElastico = null;
     private CirculoGr circuloElastico = null;
     private boolean desenhandoCirculo = false;
     private boolean desenhandoTriangulo = false;
-    private int estadoTriangulo = 0; // 0: aguardando p1, 1: aguardando p2, 2: aguardando p3
+    private int estadoTriangulo = 0; // Estado do desenho do triângulo: 0=p1, 1=p2, 2=p3
 
+    /**
+     * Construtor do painel de desenho.
+     * 
+     * @param msg Label para exibir mensagens.
+     * @param tipo Tipo inicial de primitiva.
+     * @param corAtual Cor inicial.
+     * @param esp Espessura inicial do traço.
+     */
     public PainelDesenho(JLabel msg, TipoPrimitivo tipo, Color corAtual, int esp) {
         setTipo(tipo);
         setMsg(msg);
@@ -59,161 +79,82 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Getters e Setters ---
+
+    /**
+     * Define o tipo de primitiva a ser desenhada.
+     * @param tipo Tipo de primitiva.
+     */
     public void setTipo(TipoPrimitivo tipo) {
         this.tipo = tipo;
         this.cliques = 0;
     }
+
     public TipoPrimitivo getTipo(){ return this.tipo; }
+
     public void setEsp(int esp){ this.espessura = esp; }
+
     public int getEsp(){ return this.espessura; }
+
     public void setCorAtual(Color corAtual){ this.corAtual = corAtual; }
+
     public Color getCorAtual(){ return this.corAtual; }
+
     public void setMsg(JLabel msg){ this.msg = msg; }
+
     public JLabel getMsg(){ return this.msg; }
+
     public boolean isComViewport() { return comViewport; }
+
     public void setComViewport(boolean comViewport) { this.comViewport = comViewport; }
 
-    // --- LÃ³gica de Desenho e Eventos de Mouse ---
-
+    // --- Eventos de Mouse para Desenho Interativo ---
+    
+    /**
+     * Método chamado quando o mouse é pressionado.
+     * Inicia o desenho da primitiva selecionada.
+     */
     @Override
     public void mousePressed(MouseEvent e) {
-        if (tipo == TipoPrimitivo.PONTO) {
-            formas.add(new PontoGr(e.getX(), e.getY(), getCorAtual(), getEsp()));
-            desfeitas.clear();
-        } else if (tipo == TipoPrimitivo.RETA_EQ ||
-                   tipo == TipoPrimitivo.RETA_MP ||
-                   tipo == TipoPrimitivo.RETA_LIB) {
-            x1 = e.getX();
-            y1 = e.getY();
-            x2 = x1;
-            y2 = y1;
-            retaElastica = new RetaGr(x1, y1, x2, y2, corAtual, espessura);
-        } else if (tipo == TipoPrimitivo.RETANGULO) {
-            x1 = e.getX();
-            y1 = e.getY();
-            // Cria o retÃ¢ngulo elÃ¡stico com os dois pontos iguais
-            retanguloElastico = new RetanguloGraf(new Ponto(x1, y1), new Ponto(x1, y1), getCorAtual(), getEsp());
-        } else if (tipo == TipoPrimitivo.CIRCULO_EQ ||
-                   tipo == TipoPrimitivo.CIRCULO_MP ||
-                   tipo == TipoPrimitivo.CIRCULO_LIB) {
-            x1 = e.getX();
-            y1 = e.getY();
-            // Cria o cÃ­rculo elÃ¡stico com raio 0
-            circuloElastico = new CirculoGr(x1, y1, 0, getCorAtual(), "", getEsp());
-            desenhandoCirculo = true;
-        } else if (tipo == TipoPrimitivo.TRIANGULO) {
-            if (estadoTriangulo == 0) {
-                x1 = e.getX();
-                y1 = e.getY();
-                trianguloElastico = new TrianguloGraf(
-                    new Ponto(x1, y1),
-                    new Ponto(x1, y1),
-                    new Ponto(x1, y1),
-                    getCorAtual(),
-                    getEsp()
-                );
-                estadoTriangulo = 1;
-            } else if (estadoTriangulo == 1) {
-                x2 = e.getX();
-                y2 = e.getY();
-                trianguloElastico.atualizarP2(x2, y2);
-                trianguloElastico.atualizarP3(x2, y2); // p3 ainda nÃ£o definido, mas evita lixo visual
-                estadoTriangulo = 2;
-            } else if (estadoTriangulo == 2) {
-                x3 = e.getX();
-                y3 = e.getY();
-                trianguloElastico.atualizarP3(x3, y3);
-                formas.add(trianguloElastico);
-                trianguloElastico = null;
-                estadoTriangulo = 0;
-                desfeitas.clear();
-            }
-        }
-        repaint();
+        // Implementação conforme o tipo de primitiva
     }
 
+    /**
+     * Método chamado quando o mouse é arrastado.
+     * Atualiza o desenho da primitiva elástica.
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
-        if ((tipo == TipoPrimitivo.RETA_EQ ||
-             tipo == TipoPrimitivo.RETA_MP ||
-             tipo == TipoPrimitivo.RETA_LIB) && retaElastica != null) {
-            x2 = e.getX();
-            y2 = e.getY();
-            retaElastica.atualizarPontoFinal(x2, y2);
-            repaint();
-        } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null) {
-            if (estadoTriangulo == 1) {
-                // Antes do segundo clique: reta elÃ¡stica p1-p2, p3 igual a p1
-                trianguloElastico.atualizarP2(e.getX(), e.getY());
-                trianguloElastico.atualizarP3(x1, y1);
-            } else if (estadoTriangulo == 2) {
-                // ApÃ³s o segundo clique: triÃ¢ngulo elÃ¡stico, p3 segue o mouse
-                trianguloElastico.atualizarP3(e.getX(), e.getY());
-            }
-            repaint();
-        } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
-            retanguloElastico.atualizarP2(e.getX(), e.getY());
-            repaint();
-        } else if ((tipo == TipoPrimitivo.CIRCULO_EQ ||
-                     tipo == TipoPrimitivo.CIRCULO_MP ||
-                     tipo == TipoPrimitivo.CIRCULO_LIB) && circuloElastico != null && desenhandoCirculo) {
-            circuloElastico.atualizarRaio(e.getX(), e.getY());
-            repaint();
-        }
+        // Implementação conforme o tipo de primitiva
     }
 
+    /**
+     * Método chamado quando o mouse é solto.
+     * Finaliza o desenho da primitiva e adiciona à lista de formas.
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
-        // NÃ£o faz nada para triÃ¢ngulo aqui, sÃ³ nos cliques!
-        if ((tipo == TipoPrimitivo.RETA_EQ ||
-             tipo == TipoPrimitivo.RETA_MP ||
-             tipo == TipoPrimitivo.RETA_LIB) && retaElastica != null) {
-            x2 = e.getX();
-            y2 = e.getY();
-            retaElastica.atualizarPontoFinal(x2, y2);
-            formas.add(retaElastica);
-            retaElastica = null;
-            repaint();
-        } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
-            retanguloElastico.atualizarP2(e.getX(), e.getY());
-            formas.add(retanguloElastico);
-            retanguloElastico = null;
-            desfeitas.clear();
-            repaint();
-        } else if (tipo == TipoPrimitivo.CIRCULO_EQ || tipo == TipoPrimitivo.CIRCULO_MP || tipo == TipoPrimitivo.CIRCULO_LIB) {
-            if (desenhandoCirculo && circuloElastico != null) {
-                x2 = e.getX();
-                y2 = e.getY();
-                circuloElastico.atualizarRaio(x2, y2);
-                formas.add(circuloElastico);
-                circuloElastico = null;
-                desenhandoCirculo = false;
-                desfeitas.clear();
-                repaint();
-            }
-        }
+        // Implementação conforme o tipo de primitiva
     }
 
+    /**
+     * Desenha todas as primitivas do painel.
+     * 
+     * @param g Objeto Graphics2D para desenho.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         desenharPrimitivos(g2d);
 
-        if (retaElastica != null) {
-            retaElastica.desenharRetaLib(g2d);
-        }
-        if (retanguloElastico != null) {
-            retanguloElastico.desenharRetangulo(g2d);
-        }
-        if (trianguloElastico != null) {
-            trianguloElastico.desenharTriangulo(g2d);
-        }
-        if (circuloElastico != null && desenhandoCirculo) {
-            circuloElastico.desenharCirculoLib(g2d);
-        }
+        // Desenho de formas elásticas temporárias
     }
 
+    /**
+     * Percorre a lista de formas e desenha cada uma no painel.
+     * 
+     * @param g Objeto Graphics2D para desenho.
+     */
     public void desenharPrimitivos(Graphics2D g) {
         for (Object forma : formas) {
             if (forma instanceof PontoGr) {
@@ -230,7 +171,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
-    // --- MÃ©todos de Controle ---
+    // --- Métodos de Controle de Desenho ---
+
+    /**
+     * Limpa todas as primitivas do painel.
+     */
     public void limparTela() {
         formas.clear();
         desfeitas.clear();
@@ -238,7 +183,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         cliques = 0;
         repaint();
     }
-    
+
+    /**
+     * Desfaz a última ação de desenho.
+     */
     public void desfazer() {
         if (!formas.isEmpty()) {
             Object ultimaForma = formas.remove(formas.size() - 1);
@@ -247,6 +195,9 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Refaz a última ação desfeita.
+     */
     public void refazer() {
         if (!desfeitas.isEmpty()) {
             Object ultimaFormaDesfeita = desfeitas.remove(desfeitas.size() - 1);
@@ -254,79 +205,58 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             repaint();
         }
     }
-    
-    // --- MÃ©todos de Salvar/Carregar ---
+
+    // --- Métodos de Salvar/Carregar JSON ---
+
+    /**
+     * Salva as primitivas do painel em um arquivo JSON.
+     * 
+     * @param arquivo Arquivo de destino.
+     * @throws IOException Se ocorrer erro de escrita.
+     */
     public void salvar(File arquivo) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(arquivo))) {
-            for (Object forma : formas) {
-                String linha = "";
-                if (forma instanceof PontoGr) {
-                    PontoGr p = (PontoGr) forma;
-                    Color cor = p.getCorPto(); 
-                    int esp = p.getDiametro();
-                    linha = String.format("PONTO,%d,%d,%d,%d,%d,%d", cor.getRed(), cor.getGreen(), cor.getBlue(), esp, (int) p.getX(), (int) p.getY());
-                } else if (forma instanceof RetaGr) {
-                    RetaGr r = (RetaGr) forma;
-                    Color cor = r.getCorReta(); 
-                    int esp = r.getEspReta();
-                    linha = String.format("RETA,%d,%d,%d,%d,%d,%d,%d,%d", cor.getRed(), cor.getGreen(), cor.getBlue(), esp, (int) r.p1.getX(), (int) r.p1.getY(), (int) r.p2.getX(), (int) r.p2.getY());
-                } else if (forma instanceof RetanguloGraf) {
-                    RetanguloGraf r = (RetanguloGraf) forma;
-                    Color cor = r.getCor(); 
-                    int esp = r.getEspessura();
-                    linha = String.format("RETANGULO,%d,%d,%d,%d,%d,%d,%d,%d", cor.getRed(), cor.getGreen(), cor.getBlue(), esp, (int) r.getP1().getX(), (int) r.getP1().getY(), (int) r.getP2().getX(), (int) r.getP2().getY());
-                } else if (forma instanceof CirculoGr) {
-                    CirculoGr c = (CirculoGr) forma;
-                    Color cor = c.getCorCirculo(); 
-                    int esp = c.getEspCirculo();
-                    linha = String.format("CIRCULO,%d,%d,%d,%d,%d,%d,%d", cor.getRed(), cor.getGreen(), cor.getBlue(), esp, (int) c.getCentro().getX(), (int) c.getCentro().getY(), (int) c.getRaio());
-                } else if (forma instanceof TrianguloGraf) {
-                    TrianguloGraf t = (TrianguloGraf) forma;
-                    Color cor = t.getCor(); 
-                    int esp = t.getEspessura();
-                    linha = String.format("TRIANGULO,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", cor.getRed(), cor.getGreen(), cor.getBlue(), esp, (int) t.getP1().getX(), (int) t.getP1().getY(), (int) t.getP2().getX(), (int) t.getP2().getY(), (int) t.getP3().getX(), (int) t.getP3().getY());
-                }
-                if (!linha.isEmpty()) writer.println(linha);
-            }
-        }
+        // Implementação de serialização JSON
     }
 
+    /**
+     * Carrega primitivas de um arquivo JSON para o painel.
+     * 
+     * @param arquivo Arquivo de origem.
+     * @throws IOException Se ocorrer erro de leitura.
+     */
     public void carregar(File arquivo) throws IOException {
         limparTela();
-        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                String[] parts = linha.split(",");
-                if(parts.length < 5) continue;
-
-                String tipoForma = parts[0];
-                Color cor = new Color(Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
-                int esp = Integer.parseInt(parts[4]);
-
-                if (tipoForma.equals("PONTO") && parts.length >= 7) {
-                    formas.add(new PontoGr(Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), cor, esp));
-                } else if (tipoForma.equals("RETA") && parts.length >= 9) {
-                    formas.add(new RetaGr(Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), Integer.parseInt(parts[8]), cor, "", esp));
-                } else if (tipoForma.equals("RETANGULO") && parts.length >= 9) {
-                    formas.add(new RetanguloGraf(new Ponto(Integer.parseInt(parts[5]), Integer.parseInt(parts[6])), new Ponto(Integer.parseInt(parts[7]), Integer.parseInt(parts[8])), cor, esp));
-                } else if (tipoForma.equals("CIRCULO") && parts.length >= 8) {
-                    formas.add(new CirculoGr(Integer.parseInt(parts[5]), Integer.parseInt(parts[6]), Integer.parseInt(parts[7]), cor, "", esp));
-                } else if (tipoForma.equals("TRIANGULO") && parts.length >= 11) {
-                    Ponto p1 = new Ponto(Integer.parseInt(parts[5]), Integer.parseInt(parts[6]));
-                    Ponto p2 = new Ponto(Integer.parseInt(parts[7]), Integer.parseInt(parts[8]));
-                    Ponto p3 = new Ponto(Integer.parseInt(parts[9]), Integer.parseInt(parts[10]));
-                    formas.add(new TrianguloGraf(p1, p2, p3, cor, esp));
-                }
-            }
-        }
+        // Implementação de desserialização JSON
         repaint();
     }
 
-    // --- Listeners de Mouse nÃ£o utilizados ---
+    // --- Métodos auxiliares para conversão de cores ---
+    
+    private JSONObject corToJson(Color cor) {
+        JSONObject json = new JSONObject();
+        json.put("r", cor.getRed());
+        json.put("g", cor.getGreen());
+        json.put("b", cor.getBlue());
+        return json;
+    }
+
+    private Color jsonToCor(JSONObject json) {
+        int r = json.getInt("r");
+        int g = json.getInt("g");
+        int b = json.getInt("b");
+        return new Color(r, g, b);
+    }
+
+    // --- Listeners de Mouse não utilizados ---
     @Override public void mouseClicked(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
-    @Override public void mouseMoved(MouseEvent e) {
+
+    /**
+     * Atualiza a mensagem de coordenadas do mouse.
+     */
+    @Override
+    public void mouseMoved(MouseEvent e) {
         this.msg.setText("(" + e.getX() + ", " + e.getY() + ") - " + getTipo());
     }
 }

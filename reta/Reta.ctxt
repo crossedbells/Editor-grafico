@@ -10,6 +10,15 @@ comment10.text=\r\n\ @return\ valor\ de\ b\ da\ equacao\:\ y\=mx+b\r\n
 comment11.params=
 comment11.target=java.lang.String\ toString()
 comment11.text=\r\n\ Method\ toString\r\n\r\n\ @return\ The\ return\ value\r\n
+comment12.params=
+comment12.target=org.json.JSONObject\ toJson()
+comment12.text=\r\n\ Converte\ a\ reta\ para\ formato\ JSON\r\n\ @return\ JSONObject\ representando\ a\ reta\r\n
+comment13.params=json
+comment13.target=Reta\ fromJson(org.json.JSONObject)
+comment13.text=\r\n\ Cria\ uma\ Reta\ a\ partir\ de\ um\ JSONObject\r\n\ @param\ json\ JSONObject\ contendo\ os\ dados\ da\ reta\r\n\ @return\ novo\ objeto\ Reta\r\n
+comment14.params=jsonArray
+comment14.target=java.util.List\ fromJsonArray(org.json.JSONArray)
+comment14.text=\r\n\ Cria\ uma\ lista\ de\ Retas\ a\ partir\ de\ um\ JSONArray\r\n\ @param\ jsonArray\ JSONArray\ contendo\ retas\r\n\ @return\ lista\ de\ objetos\ Reta\r\n
 comment2.params=x1\ y1\ x2\ y2
 comment2.target=Reta(double,\ double,\ double,\ double)
 comment2.text=\r\n\ Constroi\ reta\ entre\ as\ coordenadas\ x1,\ y1\ e\ x2,\ y2\ (double)\r\n\ \r\n\ @param\ x1\ coordenada\ x\ de\ p1\r\n\ @param\ y1\ coordenada\ y\ de\ p1\r\n\ @param\ x2\ coordenada\ x\ de\ p2\r\n\ @param\ y2\ coordenada\ y\ de\ p2\r\n
@@ -34,4 +43,4 @@ comment8.text=\r\n\ @return\ ponto\ p2\r\n
 comment9.params=
 comment9.target=double\ calcularM()
 comment9.text=\r\n\ @return\ valor\ de\ m\ da\ equacao\:\ y\=mx+b\r\n
-numComments=12
+numComments=15

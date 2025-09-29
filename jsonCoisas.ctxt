@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.target=jsonCoisas
+comment0.text=\r\n\ Utilit\u00E1rio\ para\ salvar\ e\ ler\ figuras\ em\ formato\ JSON.\ \r\n\ Esta\ classe\ fornece\ m\u00E9todos\ para\ serializar\ e\ desserializar\ figuras\ geom\u00E9tricas,\r\n\ como\ pontos,\ retas,\ c\u00EDrculos,\ tri\u00E2ngulos\ e\ ret\u00E2ngulos,\ em\ um\ arquivo\ JSON.\r\n
+comment1.params=pontos\ retas\ circulos\ triangulos\ retangulos\ caminhoArquivo
+comment1.target=void\ salvarFiguras(java.util.List,\ java.util.List,\ java.util.List,\ java.util.List,\ java.util.List,\ java.lang.String)
+comment1.text=\r\n\ Salva\ as\ listas\ de\ figuras\ geom\u00E9tricas\ em\ um\ arquivo\ JSON.\r\n\r\n\ @param\ pontos\ Lista\ de\ objetos\ Ponto\ a\ ser\ salva\ no\ arquivo.\r\n\ @param\ retas\ Lista\ de\ objetos\ Reta\ a\ ser\ salva\ no\ arquivo.\r\n\ @param\ circulos\ Lista\ de\ objetos\ Circulo\ a\ ser\ salva\ no\ arquivo.\r\n\ @param\ triangulos\ Lista\ de\ objetos\ Triangulo\ a\ ser\ salva\ no\ arquivo.\r\n\ @param\ retangulos\ Lista\ de\ objetos\ Retangulo\ a\ ser\ salva\ no\ arquivo.\r\n\ @param\ caminhoArquivo\ Caminho\ do\ arquivo\ onde\ os\ dados\ ser\u00E3o\ salvos.\r\n\ @throws\ IOException\ Se\ ocorrer\ um\ erro\ ao\ escrever\ no\ arquivo.\r\n
+comment2.params=caminhoArquivo
+comment2.target=jsonCoisas.FigurasContainer\ lerFiguras(java.lang.String)
+comment2.text=\r\n\ L\u00EA\ as\ listas\ de\ figuras\ geom\u00E9tricas\ de\ um\ arquivo\ JSON.\r\n\r\n\ @param\ caminhoArquivo\ Caminho\ do\ arquivo\ JSON\ a\ ser\ lido.\r\n\ @return\ Um\ container\ com\ as\ listas\ de\ figuras\ lidas\ do\ arquivo.\r\n\ @throws\ IOException\ Se\ ocorrer\ um\ erro\ ao\ ler\ o\ arquivo.\r\n\ @throws\ JSONException\ Se\ o\ formato\ do\ JSON\ for\ inv\u00E1lido.\r\n
+comment3.params=pontos
+comment3.target=org.json.JSONArray\ pontosToJsonArray(java.util.List)
+comment3.text=\r\n\ Converte\ uma\ lista\ de\ objetos\ Ponto\ para\ um\ JSONArray.\r\n\r\n\ @param\ pontos\ Lista\ de\ objetos\ Ponto.\r\n\ @return\ Um\ JSONArray\ contendo\ os\ pontos.\r\n
+comment4.params=retas
+comment4.target=org.json.JSONArray\ retasToJsonArray(java.util.List)
+comment4.text=\r\n\ Converte\ uma\ lista\ de\ objetos\ Reta\ para\ um\ JSONArray.\r\n\r\n\ @param\ retas\ Lista\ de\ objetos\ Reta.\r\n\ @return\ Um\ JSONArray\ contendo\ as\ retas.\r\n
+comment5.params=circulos
+comment5.target=org.json.JSONArray\ circulosToJsonArray(java.util.List)
+comment5.text=\r\n\ Converte\ uma\ lista\ de\ objetos\ Circulo\ para\ um\ JSONArray.\r\n\r\n\ @param\ circulos\ Lista\ de\ objetos\ Circulo.\r\n\ @return\ Um\ JSONArray\ contendo\ os\ c\u00EDrculos.\r\n
+comment6.params=triangulos
+comment6.target=org.json.JSONArray\ triangulosToJsonArray(java.util.List)
+comment6.text=\r\n\ Converte\ uma\ lista\ de\ objetos\ Triangulo\ para\ um\ JSONArray.\r\n\r\n\ @param\ triangulos\ Lista\ de\ objetos\ Triangulo.\r\n\ @return\ Um\ JSONArray\ contendo\ os\ tri\u00E2ngulos.\r\n
+comment7.params=retangulos
+comment7.target=org.json.JSONArray\ retangulosToJsonArray(java.util.List)
+comment7.text=\r\n\ Converte\ uma\ lista\ de\ objetos\ Retangulo\ para\ um\ JSONArray.\r\n\r\n\ @param\ retangulos\ Lista\ de\ objetos\ Retangulo.\r\n\ @return\ Um\ JSONArray\ contendo\ os\ ret\u00E2ngulos.\r\n
+numComments=8

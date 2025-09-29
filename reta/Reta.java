@@ -1,20 +1,31 @@
 package reta;
+
 import ponto.Ponto;
+import org.json.JSONObject;
+import org.json.JSONArray;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Reta matematica.
- *
- * @author Julio
- * @version 12/08/2020
+ * Representação de uma reta matemática no plano 2D.
+ * Permite manipulação dos pontos extremos, cálculo de coeficientes da equação
+ * y = mx + b, e conversão para/da representação JSON.
+ * 
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
  */
 public class Reta {
 
     /**
-     * Atributos da reta
+     * Pontos extremos da reta.
      */
     public Ponto p1, p2;
 
     /**
-     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (int)
+     * Constrói uma reta a partir de coordenadas inteiras.
      * 
      * @param x1 coordenada x de p1
      * @param y1 coordenada y de p1
@@ -27,7 +38,7 @@ public class Reta {
     }
 
     /**
-     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (double)
+     * Constrói uma reta a partir de coordenadas decimais.
      * 
      * @param x1 coordenada x de p1
      * @param y1 coordenada y de p1
@@ -40,9 +51,10 @@ public class Reta {
     }
 
     /**
-     * Construtor de reta entre P1 e P2
-     * @param p1 ponto p1 da reta
-     * @param p2 ponto p2 da reta
+     * Constrói uma reta a partir de dois objetos Ponto.
+     * 
+     * @param p1 ponto inicial da reta
+     * @param p2 ponto final da reta
      */
     public Reta(Ponto p1, Ponto p2) {
         setP1(p1);
@@ -50,29 +62,36 @@ public class Reta {
     }
 
     /**
-     * Gera uma copia da reta
-     * @param r reata ser copiado
+     * Construtor de cópia.
+     * 
+     * @param r Reta a ser copiada
      */
-    public Reta (Reta r){
+    public Reta(Reta r) {
         setP1(r.getP1());
         setP2(r.getP2());
     }
 
     /**
-     * @param p ponto a ser copiado
+     * Define o ponto inicial da reta.
+     * 
+     * @param p ponto a ser atribuído como p1
      */
     public void setP1(Ponto p){
         this.p1 = p;
     }
 
     /**
-     * @param p ponto a ser copiado
+     * Define o ponto final da reta.
+     * 
+     * @param p ponto a ser atribuído como p2
      */
     public void setP2(Ponto p){
         this.p2 = p;
     }
 
     /**
+     * Retorna o ponto inicial da reta.
+     * 
      * @return ponto p1
      */
     public Ponto getP1(){
@@ -80,38 +99,82 @@ public class Reta {
     }
 
     /**
+     * Retorna o ponto final da reta.
+     * 
      * @return ponto p2
      */
     public Ponto getP2(){
         return this.p2;
     }
+
     /**
-     * @return valor de m da equacao: y=mx+b
+     * Calcula o coeficiente angular (m) da equação da reta: y = mx + b
+     * 
+     * @return valor do coeficiente angular m
      */
     public double calcularM(){
-        // m = (y2-y1)/(x2-x1)
-        double m = (getP2().getY() - getP1().getY())/(getP2().getX() - getP1().getX());
+        double m = (getP2().getY() - getP1().getY()) / (getP2().getX() - getP1().getX());
         return m;
     }
+
     /**
-     * @return valor de b da equacao: y=mx+b
+     * Calcula o coeficiente linear (b) da equação da reta: y = mx + b
+     * 
+     * @return valor do coeficiente linear b
      */
     public double calcularB(){
-        //b = y1 - mx1
-        double b = getP1().getY() - calcularM()*getP1().getX();
+        double b = getP1().getY() - calcularM() * getP1().getX();
         return b;
     }
 
-
     /**
-     * Method toString
-     *
-     * @return The return value
+     * Retorna a representação textual da reta, incluindo seus pontos
+     * e a equação y = mx + b.
+     * 
+     * @return string representando a reta
      */
+    @Override
     public String toString(){
         String s = "P1: " + getP1().toString() + " P2: " + getP2().toString();
         s = s + "\nEq. da reta: y = " + calcularM() + "*x + " + calcularB();
         return s;
     }
 
+    /**
+     * Converte a reta em um JSONObject.
+     * 
+     * @return JSONObject representando a reta
+     */
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("p1", p1.toJson());
+        json.put("p2", p2.toJson());
+        return json;
+    }
+
+    /**
+     * Cria uma reta a partir de um JSONObject.
+     * 
+     * @param json JSONObject contendo os dados da reta
+     * @return novo objeto Reta
+     */
+    public static Reta fromJson(JSONObject json) {
+        Ponto p1 = Ponto.fromJson(json.getJSONObject("p1"));
+        Ponto p2 = Ponto.fromJson(json.getJSONObject("p2"));
+        return new Reta(p1, p2);
+    }
+
+    /**
+     * Cria uma lista de retas a partir de um JSONArray.
+     * 
+     * @param jsonArray JSONArray contendo retas
+     * @return lista de objetos Reta
+     */
+    public static List<Reta> fromJsonArray(JSONArray jsonArray) {
+        List<Reta> retas = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            retas.add(fromJson(jsonArray.getJSONObject(i)));
+        }
+        return retas;
+    }
 }

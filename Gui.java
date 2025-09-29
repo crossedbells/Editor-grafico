@@ -27,12 +27,18 @@ import constantes.Constantes;
 import constantes.TipoPrimitivo;
 
 /**
- * Cria interface com o usuario (janela, botoes, etc..)
- * * @author (Seu Nome, adaptado de Julio Arakaki)
- * @version (Data Atual)
- *
+ * Classe que cria a interface gráfica do usuário (GUI) para testar primitivas gráficas.
+ * Esta classe configura e exibe a janela com todos os componentes, como botões, controles de espessura,
+ * menus, entre outros. Também gerencia as interações do usuário com os botões e atalhos de teclado.
+ * 
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
  */
 class Gui extends JFrame {
+
     // Tipo Atual de primitivo
     private TipoPrimitivo tipoAtual = TipoPrimitivo.NENHUM;
 
@@ -42,13 +48,13 @@ class Gui extends JFrame {
     // Espessura atual do primitivo
     private int espAtual = 1;
 
-    // --- Componentes de GUI ---
+    // Componentes de GUI
     private JToolBar barraComandos = new JToolBar();
-    
+
     // Botoes de formas
     private JButton jbPonto = new JButton("Ponto");
-    private JButton jbRetaEq = new JButton("RetaEq");
-    private JButton jbCirculoEq = new JButton("CirculoEq");
+    private JButton jbRetaEq = new JButton("Reta");
+    private JButton jbCirculoEq = new JButton("Circulo");
     private JButton jbRetangulo = new JButton("Retangulo");
     private JButton jbTriangulo = new JButton("Triangulo");
 
@@ -58,7 +64,7 @@ class Gui extends JFrame {
     private JButton jbLimpar = new JButton("Limpar");
     private JButton jbCor = new JButton("Cor");
     private JButton jbSair = new JButton("Sair");
-    
+
     // Controle de espessura
     private JLabel jlEsp = new JLabel("   Espessura: " + String.format("%-5s", 1));
     private JSlider jsEsp = new JSlider(1, 50, 1);
@@ -68,21 +74,27 @@ class Gui extends JFrame {
     private JMenuBar jmbBarra = new JMenuBar(); 
     private JMenu jmArquivo, jmEditar, jmAjuda;
     private JMenuItem jmSalvar, jmCarregar, jmSair, jmDesfazer, jmRefazer, jmSobre;
-    
+
     // Para mensagens
     private JLabel msg = new JLabel("Msg: ");
 
     // Painel de desenho
     private PainelDesenho areaDesenho = new PainelDesenho(msg, tipoAtual, corAtual, 10);
 
-    // Construtor
+    /**
+     * Construtor da interface gráfica.
+     * Configura a janela principal, os componentes da barra de ferramentas e os eventos associados.
+     *
+     * @param larg Largura da janela.
+     * @param alt Altura da janela.
+     */
     public Gui(int larg, int alt) {
-        // Definicoes de janela
+        // Definições da janela
         super("Testa Primitivos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(larg, alt);
-        
-        // Adiciona os componentes na barra de comandos
+
+        // Adiciona os componentes à barra de comandos
         barraComandos.add(jbPonto);
         barraComandos.add(jbRetaEq);
         barraComandos.add(jbCirculoEq);
@@ -107,6 +119,7 @@ class Gui extends JFrame {
         msg.setForeground(Color.BLUE);
         add(msg, BorderLayout.SOUTH);
 
+        // Insere o menu e os listeners
         insereMenu();
         adicionaListeners();
         adicionaAtalhosDeTeclado();
@@ -114,6 +127,10 @@ class Gui extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adiciona os listeners de eventos para os botões da interface.
+     * Cada botão realiza uma ação no painel de desenho.
+     */
     private void adicionaListeners() {
         // --- Action Listeners para Formas ---
         jbPonto.addActionListener(e -> areaDesenho.setTipo(TipoPrimitivo.PONTO));
@@ -157,6 +174,9 @@ class Gui extends JFrame {
         jbSair.addActionListener(e -> System.exit(0));
     }
 
+    /**
+     * Adiciona atalhos de teclado para as ações de Desfazer e Refazer.
+     */
     private void adicionaAtalhosDeTeclado() {
         // Atalho para Desfazer (Ctrl+Z)
         areaDesenho.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK), "desfazerAcao");
@@ -176,7 +196,10 @@ class Gui extends JFrame {
             }
         });
     }
-    
+
+    /**
+     * Insere os menus na barra de menus da interface.
+     */
     private void insereMenu() {
         // --- Menu Arquivo ---
         jmArquivo = new JMenu("Arquivo");
@@ -225,14 +248,18 @@ class Gui extends JFrame {
         setJMenuBar(jmbBarra);
     }
 
+    /**
+     * Salva o desenho em um arquivo.
+     */
     private void salvarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Salvar Desenho");
         if (seletor.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File arquivo = seletor.getSelectedFile();
             try {
-                if (!arquivo.getName().toLowerCase().endsWith(".txt")) {
-                    arquivo = new File(arquivo.getParentFile(), arquivo.getName() + ".txt");
+                // Garante que o arquivo tenha extensão .json
+                if (!arquivo.getName().toLowerCase().endsWith(".json")) {
+                    arquivo = new File(arquivo.getParentFile(), arquivo.getName() + ".json");
                 }
                 areaDesenho.salvar(arquivo);
             } catch (IOException ex) {
@@ -241,6 +268,9 @@ class Gui extends JFrame {
         }
     }
 
+    /**
+     * Carrega um desenho de um arquivo.
+     */
     private void carregarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Carregar Desenho");
@@ -256,11 +286,14 @@ class Gui extends JFrame {
         }
     }
 
+    /**
+     * Exibe informações sobre o aplicativo na janela de diálogo.
+     */
     private void sobre() {
         String texto = "Testador de Primitivos Gráficos\nVersao 2.0\n\n"
-                + "(c) Copyright 2021-2025. Todos os direitos reservados.\n\n"
-                + "Computação Gráfica e Processamento de Imagens\n"
-                + "Prof. Dr. Julio Arakaki\nCiencia da Computacao - PUCSP";
+            + "(c) Copyright 2021-2025. Todos os direitos reservados.\n\n"
+            + "Computação Gráfica e Processamento de Imagens\n"
+            + "Grupo AGGL - PUCSP";
         JOptionPane.showMessageDialog(this, texto, "Sobre Testador de Primitivos Gráficos", JOptionPane.INFORMATION_MESSAGE);
     }
 }
