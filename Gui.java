@@ -27,18 +27,12 @@ import constantes.Constantes;
 import constantes.TipoPrimitivo;
 
 /**
- * Classe que cria a interface gráfica do usuário (GUI) para testar primitivas gráficas.
- * Esta classe configura e exibe a janela com todos os componentes, como botões, controles de espessura,
- * menus, entre outros. Também gerencia as interações do usuário com os botões e atalhos de teclado.
- * 
- * @author Amora Marinho Machado
- * @author Gabriel Azevedo Cruz
- * @author Gabriel Mechi Lima
- * @author Luiz Fernando de Marchi Andrade
- * @version 05/09/2025
+ * Cria interface com o usuario (janela, botoes, etc..)
+ * * @author (Seu Nome, adaptado de Julio Arakaki)
+ * @version (Data Atual)
+ *
  */
 class Gui extends JFrame {
-
     // Tipo Atual de primitivo
     private TipoPrimitivo tipoAtual = TipoPrimitivo.NENHUM;
 
@@ -48,7 +42,7 @@ class Gui extends JFrame {
     // Espessura atual do primitivo
     private int espAtual = 1;
 
-    // Componentes de GUI
+    // --- Componentes de GUI ---
     private JToolBar barraComandos = new JToolBar();
 
     // Botoes de formas
@@ -81,20 +75,14 @@ class Gui extends JFrame {
     // Painel de desenho
     private PainelDesenho areaDesenho = new PainelDesenho(msg, tipoAtual, corAtual, 10);
 
-    /**
-     * Construtor da interface gráfica.
-     * Configura a janela principal, os componentes da barra de ferramentas e os eventos associados.
-     *
-     * @param larg Largura da janela.
-     * @param alt Altura da janela.
-     */
+    // Construtor
     public Gui(int larg, int alt) {
-        // Definições da janela
+        // Definicoes de janela
         super("Testa Primitivos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(larg, alt);
 
-        // Adiciona os componentes à barra de comandos
+        // Adiciona os componentes na barra de comandos
         barraComandos.add(jbPonto);
         barraComandos.add(jbRetaEq);
         barraComandos.add(jbCirculoEq);
@@ -119,7 +107,6 @@ class Gui extends JFrame {
         msg.setForeground(Color.BLUE);
         add(msg, BorderLayout.SOUTH);
 
-        // Insere o menu e os listeners
         insereMenu();
         adicionaListeners();
         adicionaAtalhosDeTeclado();
@@ -127,10 +114,6 @@ class Gui extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Adiciona os listeners de eventos para os botões da interface.
-     * Cada botão realiza uma ação no painel de desenho.
-     */
     private void adicionaListeners() {
         // --- Action Listeners para Formas ---
         jbPonto.addActionListener(e -> areaDesenho.setTipo(TipoPrimitivo.PONTO));
@@ -144,62 +127,56 @@ class Gui extends JFrame {
         jbRefazer.addActionListener(e -> areaDesenho.refazer());
 
         jbLimpar.addActionListener(e -> {
-            areaDesenho.limparTela();
-            jsEsp.setValue(1);
-            areaDesenho.setCorAtual(Color.BLACK);
-            jbCor.setForeground(Color.BLACK);
-            areaDesenho.setTipo(TipoPrimitivo.NENHUM);
-        });
+                    areaDesenho.limparTela();
+                    jsEsp.setValue(1);
+                    areaDesenho.setCorAtual(Color.BLACK);
+                    jbCor.setForeground(Color.BLACK);
+                    areaDesenho.setTipo(TipoPrimitivo.NENHUM);
+            });
 
         jbCor.addActionListener(e -> {
-            Color c = JColorChooser.showDialog(this, "Escolha uma cor", corAtual);
-            if (c != null) {
-                corAtual = c;
-                areaDesenho.setCorAtual(corAtual);
-                jbCor.setForeground(corAtual);
-            }
-        });
+                    Color c = JColorChooser.showDialog(this, "Escolha uma cor", corAtual);
+                    if (c != null) {
+                        corAtual = c;
+                        areaDesenho.setCorAtual(corAtual);
+                        jbCor.setForeground(corAtual);
+                    }
+            });
 
         jsEsp.addChangeListener(e -> {
-            espAtual = jsEsp.getValue();
-            jlEsp.setText("   Espessura: " + String.format("%-5s", espAtual));
-            areaDesenho.setEsp(espAtual);
-        });
+                    espAtual = jsEsp.getValue();
+                    jlEsp.setText("   Espessura: " + String.format("%-5s", espAtual));
+                    areaDesenho.setEsp(espAtual);
+            });
 
         jcbComViewp.addActionListener(e -> {
-            AbstractButton absB = (AbstractButton) e.getSource();
-            areaDesenho.setComViewport(absB.getModel().isSelected());
-        });
+                    AbstractButton absB = (AbstractButton) e.getSource();
+                    areaDesenho.setComViewport(absB.getModel().isSelected());
+            });
 
         jbSair.addActionListener(e -> System.exit(0));
     }
 
-    /**
-     * Adiciona atalhos de teclado para as ações de Desfazer e Refazer.
-     */
     private void adicionaAtalhosDeTeclado() {
         // Atalho para Desfazer (Ctrl+Z)
         areaDesenho.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK), "desfazerAcao");
         areaDesenho.getActionMap().put("desfazerAcao", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                areaDesenho.desfazer();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    areaDesenho.desfazer();
+                }
+            });
 
         // Atalho para Refazer (Ctrl+Y)
         areaDesenho.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK), "refazerAcao");
         areaDesenho.getActionMap().put("refazerAcao", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                areaDesenho.refazer();
-            }
-        });
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    areaDesenho.refazer();
+                }
+            });
     }
 
-    /**
-     * Insere os menus na barra de menus da interface.
-     */
     private void insereMenu() {
         // --- Menu Arquivo ---
         jmArquivo = new JMenu("Arquivo");
@@ -248,9 +225,6 @@ class Gui extends JFrame {
         setJMenuBar(jmbBarra);
     }
 
-    /**
-     * Salva o desenho em um arquivo.
-     */
     private void salvarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Salvar Desenho");
@@ -268,9 +242,6 @@ class Gui extends JFrame {
         }
     }
 
-    /**
-     * Carrega um desenho de um arquivo.
-     */
     private void carregarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Carregar Desenho");
@@ -286,14 +257,11 @@ class Gui extends JFrame {
         }
     }
 
-    /**
-     * Exibe informações sobre o aplicativo na janela de diálogo.
-     */
     private void sobre() {
         String texto = "Testador de Primitivos Gráficos\nVersao 2.0\n\n"
             + "(c) Copyright 2021-2025. Todos os direitos reservados.\n\n"
             + "Computação Gráfica e Processamento de Imagens\n"
-            + "Grupo AGGL - PUCSP";
+            + "Grupo AGGL\nCiencia da Computacao - PUCSP";
         JOptionPane.showMessageDialog(this, texto, "Sobre Testador de Primitivos Gráficos", JOptionPane.INFORMATION_MESSAGE);
     }
 }

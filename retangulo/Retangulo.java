@@ -1,15 +1,16 @@
 package retangulo;
 
 import ponto.Ponto;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa um ret‚ngulo definido por dois pontos opostos (p1 e p2).
- * A partir desses pontos, os outros dois cantos (p3 e p4) s„o calculados
- * automaticamente, formando um ret‚ngulo alinhado aos eixos cartesianos.
+ * Representa um ret√¢ngulo definido por dois pontos opostos (p1 e p2).
+ * A partir desses pontos, os outros dois cantos (p3 e p4) s√£o calculados
+ * automaticamente, formando um ret√¢ngulo alinhado aos eixos cartesianos.
  * 
  * <p>Exemplo de uso:</p>
  * <pre>
@@ -17,27 +18,28 @@ import java.util.List;
  *     Ponto p2 = new Ponto(4, 3);
  *     Retangulo r = new Retangulo(p1, p2);
  * </pre>
- *
- * Nesse exemplo, o ret‚ngulo È formado pelos pontos (0,0), (4,3), (0,3) e (4,0).
  * 
- * @author Amora Marinho Machado
- * @author Gabriel Azevedo Cruz
- * @author Gabriel Mechi Lima
- * @author Luiz Fernando de Marchi Andrade
- * @version 05/09/2025
+ * Nesse exemplo, o ret√¢ngulo √© formado pelos pontos (0,0), (4,3), (0,3) e (4,0).
+ * 
+ * @author Seu Nome
+ * @version 1.0
  */
 public class Retangulo {
-
-    private Ponto p1; // Um canto do ret‚ngulo
-    private Ponto p2; // Canto oposto a p1
-    private Ponto p3; // Canto calculado
-    private Ponto p4; // Canto calculado
+    /** Um canto do ret√¢ngulo. */
+    private Ponto p1;
+    /** O canto oposto ao ponto {@code p1}. */
+    private Ponto p2;
+    /** O terceiro canto do ret√¢ngulo, calculado automaticamente. */
+    private Ponto p3;
+    /** O quarto canto do ret√¢ngulo, calculado automaticamente. */
+    private Ponto p4;
 
     /**
-     * ConstrÛi um ret‚ngulo a partir de dois pontos opostos.
+     * Constr√≥i um ret√¢ngulo a partir de dois pontos opostos.
+     * Os outros dois cantos s√£o calculados automaticamente.
      *
-     * @param p1 um dos cantos
-     * @param p2 canto oposto a p1
+     * @param p1 um dos cantos do ret√¢ngulo
+     * @param p2 o canto oposto a {@code p1}
      */
     public Retangulo(Ponto p1, Ponto p2) {
         this.p1 = p1;
@@ -45,28 +47,87 @@ public class Retangulo {
         calcularP3P4();
     }
 
-    /** Calcula os pontos p3 e p4 com base em p1 e p2 */
+    /**
+     * Calcula os pontos {@code p3} e {@code p4} com base em {@code p1} e {@code p2}.
+     * <ul>
+     *   <li>{@code p3} ter√° a coordenada X de {@code p1} e a coordenada Y de {@code p2}.</li>
+     *   <li>{@code p4} ter√° a coordenada X de {@code p2} e a coordenada Y de {@code p1}.</li>
+     * </ul>
+     */
     private void calcularP3P4() {
         this.p3 = new Ponto(p1.getX(), p2.getY());
         this.p4 = new Ponto(p2.getX(), p1.getY());
     }
 
-    /** Getters e Setters */
-    public Ponto getP1() { return p1; }
-    public void setP1(Ponto p1) { this.p1 = p1; calcularP3P4(); }
-    public Ponto getP2() { return p2; }
-    public void setP2(Ponto p2) { this.p2 = p2; calcularP3P4(); }
-    public Ponto getP3() { return p3; }
-    public Ponto getP4() { return p4; }
+    /**
+     * Retorna o ponto {@code p1}.
+     *
+     * @return o ponto {@code p1}
+     */
+    public Ponto getP1() {
+        return p1;
+    }
 
-    /** Atualiza p2 e recalcula os outros cantos */
+    /**
+     * Define o ponto {@code p1} e recalcula os outros cantos do ret√¢ngulo.
+     *
+     * @param p1 o novo ponto {@code p1}
+     */
+    public void setP1(Ponto p1) {
+        this.p1 = p1;
+        calcularP3P4();
+    }
+
+    /**
+     * Retorna o ponto {@code p2}.
+     *
+     * @return o ponto {@code p2}
+     */
+    public Ponto getP2() {
+        return p2;
+    }
+
+    /**
+     * Define o ponto {@code p2} e recalcula os outros cantos do ret√¢ngulo.
+     *
+     * @param p2 o novo ponto {@code p2}
+     */
+    public void setP2(Ponto p2) {
+        this.p2 = p2;
+        calcularP3P4();
+    }
+
+    /**
+     * Retorna o ponto {@code p3}, calculado automaticamente.
+     *
+     * @return o ponto {@code p3}
+     */
+    public Ponto getP3() {
+        return p3;
+    }
+
+    /**
+     * Retorna o ponto {@code p4}, calculado automaticamente.
+     *
+     * @return o ponto {@code p4}
+     */
+    public Ponto getP4() {
+        return p4;
+    }
+
+    /**
+     * Atualiza o ponto p2 (canto oposto) do ret√¢ngulo e recalcula os outros cantos.
+     */
     public void atualizarP2(int x, int y) {
         this.p2.setX(x);
         this.p2.setY(y);
         calcularP3P4();
     }
 
-    /** Converte o ret‚ngulo para JSON */
+    /**
+     * Converte o ret‚ngulo para formato JSON
+     * @return JSONObject representando o ret‚ngulo
+     */
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("p1", p1.toJson());
@@ -74,14 +135,22 @@ public class Retangulo {
         return json;
     }
 
-    /** Cria um Ret‚ngulo a partir de JSON */
+    /**
+     * Cria um Ret‚ngulo a partir de um JSONObject
+     * @param json JSONObject contendo os dados do ret‚ngulo
+     * @return novo objeto Retangulo
+     */
     public static Retangulo fromJson(JSONObject json) {
         Ponto p1 = Ponto.fromJson(json.getJSONObject("p1"));
         Ponto p2 = Ponto.fromJson(json.getJSONObject("p2"));
         return new Retangulo(p1, p2);
     }
 
-    /** Cria uma lista de Ret‚ngulos a partir de um JSONArray */
+    /**
+     * Cria uma lista de Ret‚ngulos a partir de um JSONArray
+     * @param jsonArray JSONArray contendo ret‚ngulos
+     * @return lista de objetos Retangulo
+     */
     public static List<Retangulo> fromJsonArray(JSONArray jsonArray) {
         List<Retangulo> retangulos = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -89,4 +158,5 @@ public class Retangulo {
         }
         return retangulos;
     }
+
 }

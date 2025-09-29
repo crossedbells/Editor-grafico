@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=App
-comment0.text=\r\n\ Aplica\u00E7\u00E3o\ para\ testar\ primitivas\ gr\u00E1ficas.\r\n\ Esta\ aplica\u00E7\u00E3o\ inicializa\ a\ interface\ gr\u00E1fica\ do\ usu\u00E1rio\ (UI),\ definindo\ a\ largura\ e\ a\ altura\ da\ janela.\r\n\ \r\n\ @author\ Amora\ Marinho\ Machado\r\n\ @author\ Gabriel\ Azevedo\ Cruz\r\n\ @author\ Gabriel\ Mechi\ Lima\r\n\ @author\ Luiz\ Fernando\ de\ Marchi\ Andrade\r\n\ @version\ 05/09/2025\r\n
+comment0.text=\r\n\ Aplicacao\ para\ testar\ primitivos\ graficos.\r\n\ \r\n\ @author\ Amora\ Marinho\ Machado\r\n\ @author\ Gabriel\ Azevedo\ Cruz\r\n\ @author\ Gabriel\ Mechi\ Lima\r\n\ @author\ Luiz\ Fernando\ de\ Marchi\ Andrade\r\n\ @version\ 05/09/2025\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-comment1.text=\r\n\ M\u00E9todo\ principal\ da\ aplica\u00E7\u00E3o.\r\n\ Este\ m\u00E9todo\ \u00E9\ respons\u00E1vel\ por\ iniciar\ a\ interface\ gr\u00E1fica\ (UI),\ configurando\ a\ largura\ e\ a\ altura\r\n\ da\ janela\ conforme\ as\ constantes\ definidas.\r\n\ \r\n\ @param\ args\ Vetor\ de\ strings\ que\ pode\ conter\ par\u00E2metros\ de\ entrada\ para\ a\ aplica\u00E7\u00E3o.\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ N\u00E3o\ utilizado\ neste\ caso.\r\n
+comment1.text=\r\n\ Programa\ principal.\ Ativa\ a\ UI\ da\ aplicacao,\ definindo\ a\ largura\ e\ altura\ da\ janela.\r\n\ \r\n\ @param\ args\ vetor\ de\ strings\ de\ par\u00EF\u00BF\u00BDmetros\ de\ entrada\r\n
 numComments=2

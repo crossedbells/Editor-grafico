@@ -1,39 +1,26 @@
 package circulo;
-
 import ponto.Ponto;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa um círculo matemático no plano 2D.
- * Permite manipulação do centro e raio, atualização do raio
- * a partir de um ponto na borda, e conversão para/da representação JSON.
+ * Implementa circulo matematico.
  * 
- * @author Amora Marinho Machado
- * @author Gabriel Azevedo Cruz
- * @author Gabriel Mechi Lima
- * @author Luiz Fernando de Marchi Andrade
- * @version 05/09/2025
+ * @author Julio Arakaki
+ * @version 24/08/2021
  */
 public class Circulo {
-
-    /**
-     * Centro do círculo
-     */
+    // centro do circulo
     private Ponto centro;
+    private double raio; // raio do circulo
 
     /**
-     * Raio do círculo
-     */
-    private double raio;
-
-    /**
-     * Construtor do círculo a partir de um centro e raio.
-     * 
-     * @param centro ponto central do círculo
-     * @param raio raio do círculo
+     * Contrutor da classe circulo
+     * @param centro Ponto centro do circulo
+     * @param raio double raio do circulo
      */
     public Circulo(Ponto centro, double raio) {
         setCentro(centro);
@@ -41,11 +28,10 @@ public class Circulo {
     }
 
     /**
-     * Construtor do círculo a partir de coordenadas do centro e raio.
-     * 
-     * @param x coordenada x do centro
-     * @param y coordenada y do centro
-     * @param raio raio do círculo
+     * Contrutor da classe circulo
+     * @param x double coordenada x do centro do circulo
+     * @param y double coordenada y do centro do circulo
+     * @param raio double raio do circulo
      */
     public Circulo(double x, double y, double raio) {
         setCentro(new Ponto(x, y));
@@ -53,9 +39,8 @@ public class Circulo {
     }
 
     /**
-     * Construtor de cópia.
-     * 
-     * @param c círculo a ser copiado
+     * Contrutor da classe circulo. Cria uma copia
+     * @param c Circulo circulo a ser copiado
      */
     public Circulo(Circulo c) {
         setCentro(new Ponto(c.getCentro()));
@@ -63,56 +48,47 @@ public class Circulo {
     }
 
     /**
-     * Retorna o centro do círculo.
-     * 
-     * @return objeto Ponto representando o centro
+     * @return the centro
      */
     public Ponto getCentro() {
         return centro;
     }
 
     /**
-     * Define o centro do círculo.
-     * 
-     * @param centro ponto central
+     * @param centro the centro to set
      */
     public void setCentro(Ponto centro) {
         this.centro = centro;
     }
 
     /**
-     * Retorna o raio do círculo.
-     * 
-     * @return valor do raio
+     * @return the raio
      */
     public double getRaio() {
         return raio;
     }
 
     /**
-     * Define o raio do círculo.
-     * 
-     * @param raio valor do raio
+     * @param raio the raio to set
      */
     public void setRaio(double raio) {
         this.raio = raio;
     }    
 
     /**
-     * Retorna uma representação textual do círculo.
-     * 
-     * @return string representando o círculo
+     * Method toString
+     *
+     * @return The return value
      */
-    @Override
     public String toString(){
-        return "Circulo: \n Centro: " + getCentro().toString() + " Raio: " + getRaio();
+        String s = "Circulo: \n Centro: " + getCentro().toString() + " Raio: " + getRaio();
+        return s;
     }
 
     /**
-     * Atualiza o raio do círculo com base em um ponto na borda.
-     * 
-     * @param x posição x do ponto na borda
-     * @param y posição y do ponto na borda
+     * Atualiza o raio do cÃ­rculo com base em um ponto na borda.
+     * @param x PosiÃ§Ã£o x do mouse (borda)
+     * @param y PosiÃ§Ã£o y do mouse (borda)
      */
     public void atualizarRaio(int x, int y) {
         double dx = x - getCentro().getX();
@@ -121,8 +97,7 @@ public class Circulo {
     }
 
     /**
-     * Converte o círculo para um JSONObject.
-     * 
+     * Converte o círculo para formato JSON
      * @return JSONObject representando o círculo
      */
     public JSONObject toJson() {
@@ -133,8 +108,7 @@ public class Circulo {
     }
 
     /**
-     * Cria um círculo a partir de um JSONObject.
-     * 
+     * Cria um Círculo a partir de um JSONObject
      * @param json JSONObject contendo os dados do círculo
      * @return novo objeto Circulo
      */
@@ -145,9 +119,8 @@ public class Circulo {
     }
 
     /**
-     * Cria uma lista de círculos a partir de um JSONArray.
-     * 
-     * @param jsonArray JSONArray contendo objetos círculo
+     * Cria uma lista de Círculos a partir de um JSONArray
+     * @param jsonArray JSONArray contendo círculos
      * @return lista de objetos Circulo
      */
     public static List<Circulo> fromJsonArray(JSONArray jsonArray) {
@@ -157,4 +130,6 @@ public class Circulo {
         }
         return circulos;
     }
+
+
 }

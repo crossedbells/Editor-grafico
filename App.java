@@ -1,8 +1,7 @@
 import constantes.Constantes;
 
 /**
- * Aplicação para testar primitivas gráficas.
- * Esta aplicação inicializa a interface gráfica do usuário (UI), definindo a largura e a altura da janela.
+ * Aplicacao para testar primitivos graficos.
  * 
  * @author Amora Marinho Machado
  * @author Gabriel Azevedo Cruz
@@ -11,17 +10,13 @@ import constantes.Constantes;
  * @version 05/09/2025
  */
 public class App {
-    
     /**
-     * Método principal da aplicação.
-     * Este método é responsável por iniciar a interface gráfica (UI), configurando a largura e a altura
-     * da janela conforme as constantes definidas.
+     * Programa principal. Ativa a UI da aplicacao, definindo a largura e altura da janela.
      * 
-     * @param args Vetor de strings que pode conter parâmetros de entrada para a aplicação.
-     *             Não utilizado neste caso.
+     * @param args vetor de strings de parï¿½metros de entrada
      */
     public static void main(String args[]) {
-        // Cria a janela da interface gráfica e define suas dimensões (largura e altura)
+        // Cria e define dimensao da janela (em pixels)
         new Gui(Constantes.LARGURA, Constantes.ALTURA); 
     }
 }
