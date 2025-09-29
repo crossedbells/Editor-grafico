@@ -23,32 +23,97 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+/**
+ * Painel responsavel pelo desenho de primitivos graficos.
+ * Gerencia a interacao com o usuario atraves de eventos de mouse e renderiza
+ * as formas geometricas na tela. Suporta funcoes de desfazer, refazer e
+ * persistencia em formato JSON.
+ * 
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
+ */
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
 
     // --- Variáveis da UI e de Estado ---
+    
+    /** Label para exibir mensagens ao usuario */
     private JLabel msg;
+    
+    /** Tipo de primitivo atualmente selecionado */
     private TipoPrimitivo tipo = TipoPrimitivo.NENHUM;
+    
+    /** Indica se o viewport esta ativo */
     private boolean comViewport;
+    
+    /** Cor atual para desenho */
     private Color corAtual = Color.BLACK;
+    
+    /** Espessura atual do traço */
     private int espessura = 1;
 
     // --- Coordenadas temporárias para desenho ---
-    private int x1, y1, x2, y2, x3, y3;
+    
+    /** Coordenada X do primeiro ponto */
+    private int x1;
+    
+    /** Coordenada Y do primeiro ponto */
+    private int y1;
+    
+    /** Coordenada X do segundo ponto */
+    private int x2;
+    
+    /** Coordenada Y do segundo ponto */
+    private int y2;
+    
+    /** Coordenada X do terceiro ponto */
+    private int x3;
+    
+    /** Coordenada Y do terceiro ponto */
+    private int y3;
+    
+    /** Contador de cliques do mouse */
     private int cliques = 0;
 
     // --- Estruturas de Dados para Formas e Histórico ---
+    
+    /** Lista de formas desenhadas na tela */
     private List<Object> formas = new ArrayList<>();
+    
+    /** Lista de formas desfeitas (para funcao refazer) */
     private List<Object> desfeitas = new ArrayList<>();
 
-    // Reta elástica temporária
+    /** Reta temporaria durante o desenho (feedback visual) */
     private RetaGr retaElastica = null;
+    
+    /** Triangulo temporario durante o desenho (feedback visual) */
     private TrianguloGraf trianguloElastico = null;
+    
+    /** Retangulo temporario durante o desenho (feedback visual) */
     private RetanguloGraf retanguloElastico = null;
+    
+    /** Circulo temporario durante o desenho (feedback visual) */
     private CirculoGr circuloElastico = null;
+    
+    /** Indica se esta desenhando um circulo */
     private boolean desenhandoCirculo = false;
+    
+    /** Indica se esta desenhando um triangulo */
     private boolean desenhandoTriangulo = false;
-    private int estadoTriangulo = 0; // 0: aguardando p1, 1: aguardando p2, 2: aguardando p3
+    
+    /** Estado do desenho do triangulo: 0=aguardando p1, 1=aguardando p2, 2=aguardando p3 */
+    private int estadoTriangulo = 0;
 
+    /**
+     * Construtor do painel de desenho.
+     * 
+     * @param msg label para exibir mensagens
+     * @param tipo tipo inicial de primitivo
+     * @param corAtual cor inicial de desenho
+     * @param esp espessura inicial do traço
+     */
     public PainelDesenho(JLabel msg, TipoPrimitivo tipo, Color corAtual, int esp) {
         setTipo(tipo);
         setMsg(msg);
@@ -60,31 +125,88 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Getters e Setters ---
+    
+    /**
+     * Define o tipo de primitivo a ser desenhado.
+     * 
+     * @param tipo tipo de primitivo
+     */
     public void setTipo(TipoPrimitivo tipo) {
         this.tipo = tipo;
         this.cliques = 0;
     }
 
+    /**
+     * Retorna o tipo de primitivo atual.
+     * 
+     * @return tipo de primitivo
+     */
     public TipoPrimitivo getTipo(){ return this.tipo; }
 
+    /**
+     * Define a espessura do traço.
+     * 
+     * @param esp espessura em pixels
+     */
     public void setEsp(int esp){ this.espessura = esp; }
 
+    /**
+     * Retorna a espessura atual do traço.
+     * 
+     * @return espessura em pixels
+     */
     public int getEsp(){ return this.espessura; }
 
+    /**
+     * Define a cor atual de desenho.
+     * 
+     * @param corAtual cor para desenho
+     */
     public void setCorAtual(Color corAtual){ this.corAtual = corAtual; }
 
+    /**
+     * Retorna a cor atual de desenho.
+     * 
+     * @return cor atual
+     */
     public Color getCorAtual(){ return this.corAtual; }
 
+    /**
+     * Define o label de mensagens.
+     * 
+     * @param msg label para exibir mensagens
+     */
     public void setMsg(JLabel msg){ this.msg = msg; }
 
+    /**
+     * Retorna o label de mensagens.
+     * 
+     * @return label de mensagens
+     */
     public JLabel getMsg(){ return this.msg; }
 
+    /**
+     * Verifica se o viewport esta ativo.
+     * 
+     * @return true se viewport esta ativo, false caso contrario
+     */
     public boolean isComViewport() { return comViewport; }
 
+    /**
+     * Define se o viewport esta ativo.
+     * 
+     * @param comViewport true para ativar viewport, false para desativar
+     */
     public void setComViewport(boolean comViewport) { this.comViewport = comViewport; }
 
     // --- Lógica de Desenho e Eventos de Mouse ---
 
+    /**
+     * Tratador de evento de pressionar botao do mouse.
+     * Inicia o processo de desenho de primitivos baseado no tipo selecionado.
+     * 
+     * @param e evento do mouse
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if (tipo == TipoPrimitivo.PONTO) {
@@ -140,6 +262,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         repaint();
     }
 
+    /**
+     * Tratador de evento de arrastar o mouse.
+     * Atualiza as formas elasticas durante o desenho para fornecer feedback visual.
+     * 
+     * @param e evento do mouse
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         if ((tipo == TipoPrimitivo.RETA_EQ ||
@@ -168,6 +296,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Tratador de evento de soltar botao do mouse.
+     * Finaliza o desenho da forma e adiciona a lista de formas.
+     * 
+     * @param e evento do mouse
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if ((tipo == TipoPrimitivo.RETA_EQ ||
@@ -199,6 +333,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Renderiza o componente na tela.
+     * Desenha todas as formas armazenadas e as formas elasticas temporarias.
+     * 
+     * @param g contexto grafico
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -219,6 +359,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Desenha todos os primitivos armazenados na lista de formas.
+     * 
+     * @param g contexto grafico 2D
+     */
     public void desenharPrimitivos(Graphics2D g) {
         for (Object forma : formas) {
             if (forma instanceof PontoGr) {
@@ -236,6 +381,11 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Métodos de Controle ---
+    
+    /**
+     * Limpa toda a tela, removendo todas as formas desenhadas.
+     * Reseta tambem o historico de undo/redo e coordenadas temporarias.
+     */
     public void limparTela() {
         formas.clear();
         desfeitas.clear();
@@ -244,6 +394,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         repaint();
     }
 
+    /**
+     * Desfaz a ultima forma desenhada.
+     * Move a forma para a lista de desfeitas, permitindo refaze-la.
+     */
     public void desfazer() {
         if (!formas.isEmpty()) {
             Object ultimaForma = formas.remove(formas.size() - 1);
@@ -252,6 +406,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Refaz a ultima forma desfeita.
+     * Move a forma da lista de desfeitas de volta para a lista de formas.
+     */
     public void refazer() {
         if (!desfeitas.isEmpty()) {
             Object ultimaFormaDesfeita = desfeitas.remove(desfeitas.size() - 1);
@@ -261,6 +419,14 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Métodos de Salvar/Carregar em JSON ---
+    
+    /**
+     * Salva todas as formas desenhadas em um arquivo JSON.
+     * Serializa cada forma com suas propriedades (coordenadas, cor, espessura).
+     * 
+     * @param arquivo arquivo onde sera salvo o desenho
+     * @throws IOException se houver erro ao escrever no arquivo
+     */
     public void salvar(File arquivo) throws IOException {
         JSONArray arrayFormas = new JSONArray();
 
@@ -330,6 +496,13 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         }
     }
 
+    /**
+     * Carrega formas de um arquivo JSON.
+     * Deserializa as formas e as adiciona ao painel de desenho.
+     * 
+     * @param arquivo arquivo JSON a ser carregado
+     * @throws IOException se houver erro ao ler o arquivo
+     */
     public void carregar(File arquivo) throws IOException {
         limparTela();
 
@@ -393,7 +566,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         repaint();
     }
 
-    // Métodos auxiliares para converter Color para/de JSON
+    /**
+     * Converte um objeto Color para formato JSON.
+     * 
+     * @param cor cor a ser convertida
+     * @return objeto JSON contendo componentes RGB da cor
+     */
     private JSONObject corToJson(Color cor) {
         JSONObject json = new JSONObject();
         json.put("r", cor.getRed());
@@ -402,6 +580,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         return json;
     }
 
+    /**
+     * Converte um objeto JSON para Color.
+     * 
+     * @param json objeto JSON contendo componentes RGB
+     * @return objeto Color correspondente
+     */
     private Color jsonToCor(JSONObject json) {
         int r = json.getInt("r");
         int g = json.getInt("g");
@@ -410,12 +594,34 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Listeners de Mouse não utilizados ---
+    
+    /**
+     * Tratador de clique do mouse (nao utilizado).
+     * 
+     * @param e evento do mouse
+     */
     @Override public void mouseClicked(MouseEvent e) {}
 
+    /**
+     * Tratador de entrada do mouse na area (nao utilizado).
+     * 
+     * @param e evento do mouse
+     */
     @Override public void mouseEntered(MouseEvent e) {}
 
+    /**
+     * Tratador de saida do mouse da area (nao utilizado).
+     * 
+     * @param e evento do mouse
+     */
     @Override public void mouseExited(MouseEvent e) {}
 
+    /**
+     * Tratador de movimento do mouse.
+     * Atualiza a mensagem exibindo as coordenadas atuais e o tipo de primitivo.
+     * 
+     * @param e evento do mouse
+     */
     @Override public void mouseMoved(MouseEvent e) {
         this.msg.setText("(" + e.getX() + ", " + e.getY() + ") - " + getTipo());
     }

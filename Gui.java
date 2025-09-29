@@ -27,55 +27,116 @@ import constantes.Constantes;
 import constantes.TipoPrimitivo;
 
 /**
- * Cria interface com o usuario (janela, botoes, etc..)
- * * @author (Seu Nome, adaptado de Julio Arakaki)
- * @version (Data Atual)
- *
+ * Cria interface com o usuario (janela, botoes, etc.).
+ * Gerencia a interface grafica principal da aplicacao de desenho de primitivos graficos.
+ * 
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
  */
 class Gui extends JFrame {
-    // Tipo Atual de primitivo
+    /** Tipo atual de primitivo selecionado */
     private TipoPrimitivo tipoAtual = TipoPrimitivo.NENHUM;
 
-    // Cor atual
+    /** Cor atual selecionada para desenho */
     private Color corAtual = Color.BLACK;
 
-    // Espessura atual do primitivo
+    /** Espessura atual do primitivo */
     private int espAtual = 1;
 
     // --- Componentes de GUI ---
+    
+    /** Barra de ferramentas principal */
     private JToolBar barraComandos = new JToolBar();
 
     // Botoes de formas
+    /** Botao para desenhar pontos */
     private JButton jbPonto = new JButton("Ponto");
+    
+    /** Botao para desenhar retas */
     private JButton jbRetaEq = new JButton("Reta");
+    
+    /** Botao para desenhar circulos */
     private JButton jbCirculoEq = new JButton("Circulo");
+    
+    /** Botao para desenhar retangulos */
     private JButton jbRetangulo = new JButton("Retangulo");
+    
+    /** Botao para desenhar triangulos */
     private JButton jbTriangulo = new JButton("Triangulo");
 
     // Botoes de controle
+    /** Botao para desfazer ultima acao */
     private JButton jbDesfazer = new JButton("Desfazer");
+    
+    /** Botao para refazer acao desfeita */
     private JButton jbRefazer = new JButton("Refazer");
+    
+    /** Botao para limpar toda a tela */
     private JButton jbLimpar = new JButton("Limpar");
+    
+    /** Botao para escolher cor */
     private JButton jbCor = new JButton("Cor");
+    
+    /** Botao para sair da aplicacao */
     private JButton jbSair = new JButton("Sair");
 
     // Controle de espessura
+    /** Label que exibe a espessura atual */
     private JLabel jlEsp = new JLabel("   Espessura: " + String.format("%-5s", 1));
+    
+    /** Slider para ajustar espessura do traço */
     private JSlider jsEsp = new JSlider(1, 50, 1);
+    
+    /** Checkbox para ativar/desativar viewport */
     private JCheckBox jcbComViewp = new JCheckBox("Viewport");
 
     // Barra de menu
-    private JMenuBar jmbBarra = new JMenuBar(); 
-    private JMenu jmArquivo, jmEditar, jmAjuda;
-    private JMenuItem jmSalvar, jmCarregar, jmSair, jmDesfazer, jmRefazer, jmSobre;
+    /** Barra de menu principal */
+    private JMenuBar jmbBarra = new JMenuBar();
+    
+    /** Menu Arquivo */
+    private JMenu jmArquivo;
+    
+    /** Menu Editar */
+    private JMenu jmEditar;
+    
+    /** Menu Ajuda */
+    private JMenu jmAjuda;
+    
+    /** Item de menu Salvar */
+    private JMenuItem jmSalvar;
+    
+    /** Item de menu Carregar */
+    private JMenuItem jmCarregar;
+    
+    /** Item de menu Sair */
+    private JMenuItem jmSair;
+    
+    /** Item de menu Desfazer */
+    private JMenuItem jmDesfazer;
+    
+    /** Item de menu Refazer */
+    private JMenuItem jmRefazer;
+    
+    /** Item de menu Sobre */
+    private JMenuItem jmSobre;
 
-    // Para mensagens
+    /** Label para exibir mensagens ao usuario */
     private JLabel msg = new JLabel("Msg: ");
 
-    // Painel de desenho
+    /** Painel onde os desenhos sao realizados */
     private PainelDesenho areaDesenho = new PainelDesenho(msg, tipoAtual, corAtual, 10);
 
-    // Construtor
+    /**
+     * Construtor da interface grafica.
+     * Inicializa a janela principal com todos os componentes necessarios.
+     * 
+     * @param larg largura da janela em pixels
+     * @param alt altura da janela em pixels
+     */
     public Gui(int larg, int alt) {
         // Definicoes de janela
         super("Testa Primitivos");
@@ -114,6 +175,10 @@ class Gui extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adiciona listeners aos botoes e componentes da interface.
+     * Configura as acoes para cada botao, slider e checkbox.
+     */
     private void adicionaListeners() {
         // --- Action Listeners para Formas ---
         jbPonto.addActionListener(e -> areaDesenho.setTipo(TipoPrimitivo.PONTO));
@@ -157,6 +222,10 @@ class Gui extends JFrame {
         jbSair.addActionListener(e -> System.exit(0));
     }
 
+    /**
+     * Adiciona atalhos de teclado para operacoes comuns.
+     * Configura Ctrl+Z para desfazer e Ctrl+Y para refazer.
+     */
     private void adicionaAtalhosDeTeclado() {
         // Atalho para Desfazer (Ctrl+Z)
         areaDesenho.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK), "desfazerAcao");
@@ -177,6 +246,10 @@ class Gui extends JFrame {
             });
     }
 
+    /**
+     * Cria e configura a barra de menu da aplicacao.
+     * Adiciona menus Arquivo, Editar e Ajuda com seus respectivos itens.
+     */
     private void insereMenu() {
         // --- Menu Arquivo ---
         jmArquivo = new JMenu("Arquivo");
@@ -225,6 +298,10 @@ class Gui extends JFrame {
         setJMenuBar(jmbBarra);
     }
 
+    /**
+     * Abre dialogo para salvar o desenho atual em arquivo JSON.
+     * Garante que o arquivo tenha a extensao .json.
+     */
     private void salvarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Salvar Desenho");
@@ -242,6 +319,10 @@ class Gui extends JFrame {
         }
     }
 
+    /**
+     * Abre dialogo para carregar um desenho de arquivo JSON.
+     * Exibe mensagens de erro caso o arquivo seja invalido ou corrompido.
+     */
     private void carregarArquivo() {
         JFileChooser seletor = new JFileChooser();
         seletor.setDialogTitle("Carregar Desenho");
@@ -257,6 +338,10 @@ class Gui extends JFrame {
         }
     }
 
+    /**
+     * Exibe janela de dialogo com informacoes sobre a aplicacao.
+     * Mostra versao, direitos autorais e informacoes do grupo.
+     */
     private void sobre() {
         String texto = "Testador de Primitivos Gráficos\nVersao 2.0\n\n"
             + "(c) Copyright 2021-2025. Todos os direitos reservados.\n\n"

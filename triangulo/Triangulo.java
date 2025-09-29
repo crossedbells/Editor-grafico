@@ -8,41 +8,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa um triângulo matemático definido por três pontos
- * (vértices {@code p1}, {@code p2} e {@code p3}).
+ * Representa um triangulo matematico definido por tres pontos
+ * (vertices p1, p2 e p3).
  *
- * <p>Um triângulo pode ser criado a partir de:
+ * <p>Um triangulo pode ser criado a partir de:
  * <ul>
- *   <li>três objetos {@link Ponto}</li>
+ *   <li>tres objetos {@link Ponto}</li>
  *   <li>coordenadas inteiras</li>
  *   <li>coordenadas em ponto flutuante (double)</li>
- *   <li>cópia de outro triângulo existente</li>
+ *   <li>copia de outro triangulo existente</li>
  * </ul>
  *
  * <p>Exemplo de uso:</p>
  * <pre>
  *     Triangulo t1 = new Triangulo(new Ponto(0, 0), new Ponto(5, 0), new Ponto(3, 4));
  *     Triangulo t2 = new Triangulo(0, 0, 5, 0, 3, 4); // usando inteiros
- *     Triangulo t3 = new Triangulo(t1); // cópia de outro triângulo
+ *     Triangulo t3 = new Triangulo(t1); // copia de outro triangulo
  * </pre>
  *
- * @author Seu Nome
- * @version 1.0
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
  */
 public class Triangulo {
-    /** Primeiro vértice do triângulo. */
+    /** Primeiro vertice do triangulo */
     private Ponto p1;
-    /** Segundo vértice do triângulo. */
+    
+    /** Segundo vertice do triangulo */
     private Ponto p2;
-    /** Terceiro vértice do triângulo. */
+    
+    /** Terceiro vertice do triangulo */
     private Ponto p3;
 
     /**
-     * Constrói um triângulo a partir de três pontos.
+     * Constroi um triangulo a partir de tres pontos.
      *
-     * @param p1 o primeiro vértice
-     * @param p2 o segundo vértice
-     * @param p3 o terceiro vértice
+     * @param p1 o primeiro vertice
+     * @param p2 o segundo vertice
+     * @param p3 o terceiro vertice
      */
     public Triangulo(Ponto p1, Ponto p2, Ponto p3) {
         this.p1 = p1;
@@ -51,14 +56,14 @@ public class Triangulo {
     }
 
     /**
-     * Constrói um triângulo a partir de coordenadas inteiras.
+     * Constroi um triangulo a partir de coordenadas inteiras.
      *
-     * @param x1 coordenada X do primeiro vértice
-     * @param y1 coordenada Y do primeiro vértice
-     * @param x2 coordenada X do segundo vértice
-     * @param y2 coordenada Y do segundo vértice
-     * @param x3 coordenada X do terceiro vértice
-     * @param y3 coordenada Y do terceiro vértice
+     * @param x1 coordenada X do primeiro vertice
+     * @param y1 coordenada Y do primeiro vertice
+     * @param x2 coordenada X do segundo vertice
+     * @param y2 coordenada Y do segundo vertice
+     * @param x3 coordenada X do terceiro vertice
+     * @param y3 coordenada Y do terceiro vertice
      */
     public Triangulo(int x1, int y1, int x2, int y2, int x3, int y3) {
         this.p1 = new Ponto(x1, y1);
@@ -67,14 +72,14 @@ public class Triangulo {
     }
 
     /**
-     * Constrói um triângulo a partir de coordenadas em ponto flutuante.
+     * Constroi um triangulo a partir de coordenadas em ponto flutuante.
      *
-     * @param x1 coordenada X do primeiro vértice
-     * @param y1 coordenada Y do primeiro vértice
-     * @param x2 coordenada X do segundo vértice
-     * @param y2 coordenada Y do segundo vértice
-     * @param x3 coordenada X do terceiro vértice
-     * @param y3 coordenada Y do terceiro vértice
+     * @param x1 coordenada X do primeiro vertice
+     * @param y1 coordenada Y do primeiro vertice
+     * @param x2 coordenada X do segundo vertice
+     * @param y2 coordenada Y do segundo vertice
+     * @param x3 coordenada X do terceiro vertice
+     * @param y3 coordenada Y do terceiro vertice
      */
     public Triangulo(double x1, double y1, double x2, double y2, double x3, double y3) {
         this.p1 = new Ponto(x1, y1);
@@ -83,9 +88,9 @@ public class Triangulo {
     }
 
     /**
-     * Constrói um triângulo copiando outro triângulo existente.
+     * Constroi um triangulo copiando outro triangulo existente.
      *
-     * @param t triângulo a ser copiado
+     * @param t triangulo a ser copiado
      */
     public Triangulo(Triangulo t) {
         this.p1 = t.getP1();
@@ -94,61 +99,64 @@ public class Triangulo {
     }
 
     /**
-     * Retorna o primeiro vértice do triângulo.
+     * Retorna o primeiro vertice do triangulo.
      *
-     * @return o ponto {@code p1}
+     * @return o ponto p1
      */
     public Ponto getP1() {
         return p1;
     }
 
     /**
-     * Define o primeiro vértice do triângulo.
+     * Define o primeiro vertice do triangulo.
      *
-     * @param p1 o novo ponto {@code p1}
+     * @param p1 o novo ponto p1
      */
     public void setP1(Ponto p1) {
         this.p1 = p1;
     }
 
     /**
-     * Retorna o segundo vértice do triângulo.
+     * Retorna o segundo vertice do triangulo.
      *
-     * @return o ponto {@code p2}
+     * @return o ponto p2
      */
     public Ponto getP2() {
         return p2;
     }
 
     /**
-     * Define o segundo vértice do triângulo.
+     * Define o segundo vertice do triangulo.
      *
-     * @param p2 o novo ponto {@code p2}
+     * @param p2 o novo ponto p2
      */
     public void setP2(Ponto p2) {
         this.p2 = p2;
     }
 
     /**
-     * Retorna o terceiro vértice do triângulo.
+     * Retorna o terceiro vertice do triangulo.
      *
-     * @return o ponto {@code p3}
+     * @return o ponto p3
      */
     public Ponto getP3() {
         return p3;
     }
 
     /**
-     * Define o terceiro vértice do triângulo.
+     * Define o terceiro vertice do triangulo.
      *
-     * @param p3 o novo ponto {@code p3}
+     * @param p3 o novo ponto p3
      */
     public void setP3(Ponto p3) {
         this.p3 = p3;
     }
 
     /**
-     * Atualiza o primeiro vértice do triângulo.
+     * Atualiza o primeiro vertice do triangulo.
+     * 
+     * @param x nova coordenada x do ponto p1
+     * @param y nova coordenada y do ponto p1
      */
     public void atualizarP1(int x, int y) {
         this.p1.setX(x);
@@ -156,7 +164,10 @@ public class Triangulo {
     }
 
     /**
-     * Atualiza o segundo vértice do triângulo.
+     * Atualiza o segundo vertice do triangulo.
+     * 
+     * @param x nova coordenada x do ponto p2
+     * @param y nova coordenada y do ponto p2
      */
     public void atualizarP2(int x, int y) {
         this.p2.setX(x);
@@ -164,7 +175,10 @@ public class Triangulo {
     }
 
     /**
-     * Atualiza o terceiro vértice do triângulo.
+     * Atualiza o terceiro vertice do triangulo.
+     * 
+     * @param x nova coordenada x do ponto p3
+     * @param y nova coordenada y do ponto p3
      */
     public void atualizarP3(int x, int y) {
         this.p3.setX(x);
@@ -172,8 +186,9 @@ public class Triangulo {
     }
 
     /**
-     * Converte o tri�ngulo para formato JSON
-     * @return JSONObject representando o tri�ngulo
+     * Converte o triangulo para formato JSON.
+     * 
+     * @return JSONObject representando o triangulo
      */
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -184,8 +199,9 @@ public class Triangulo {
     }
 
     /**
-     * Cria um Tri�ngulo a partir de um JSONObject
-     * @param json JSONObject contendo os dados do tri�ngulo
+     * Cria um Triangulo a partir de um JSONObject.
+     * 
+     * @param json JSONObject contendo os dados do triangulo
      * @return novo objeto Triangulo
      */
     public static Triangulo fromJson(JSONObject json) {
@@ -196,8 +212,9 @@ public class Triangulo {
     }
 
     /**
-     * Cria uma lista de Tri�ngulos a partir de um JSONArray
-     * @param jsonArray JSONArray contendo tri�ngulos
+     * Cria uma lista de Triangulos a partir de um JSONArray.
+     * 
+     * @param jsonArray JSONArray contendo triangulos
      * @return lista de objetos Triangulo
      */
     public static List<Triangulo> fromJsonArray(JSONArray jsonArray) {
@@ -207,5 +224,4 @@ public class Triangulo {
         }
         return triangulos;
     }
-
 }

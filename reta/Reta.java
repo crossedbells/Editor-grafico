@@ -7,20 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Reta matematica.
+ * Reta matematica definida por dois pontos.
+ * Permite calcular a equacao da reta no formato y = mx + b.
  *
- * @author Julio
- * @version 12/08/2020
+ * @author Amora Marinho Machado
+ * @author Gabriel Azevedo Cruz
+ * @author Gabriel Mechi Lima
+ * @author Luiz Fernando de Marchi Andrade
+ * @version 05/09/2025
  */
 public class Reta {
 
-    /**
-     * Atributos da reta
-     */
-    public Ponto p1, p2;
+    /** Primeiro ponto da reta */
+    public Ponto p1;
+    
+    /** Segundo ponto da reta */
+    public Ponto p2;
 
     /**
-     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (int)
+     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (int).
      * 
      * @param x1 coordenada x de p1
      * @param y1 coordenada y de p1
@@ -33,7 +38,7 @@ public class Reta {
     }
 
     /**
-     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (double)
+     * Constroi reta entre as coordenadas x1, y1 e x2, y2 (double).
      * 
      * @param x1 coordenada x de p1
      * @param y1 coordenada y de p1
@@ -46,7 +51,8 @@ public class Reta {
     }
 
     /**
-     * Construtor de reta entre P1 e P2
+     * Construtor de reta entre P1 e P2.
+     * 
      * @param p1 ponto p1 da reta
      * @param p2 ponto p2 da reta
      */
@@ -56,8 +62,9 @@ public class Reta {
     }
 
     /**
-     * Gera uma copia da reta
-     * @param r reata ser copiado
+     * Construtor de copia. Gera uma copia da reta.
+     * 
+     * @param r reta a ser copiada
      */
     public Reta (Reta r){
         setP1(r.getP1());
@@ -65,20 +72,26 @@ public class Reta {
     }
 
     /**
-     * @param p ponto a ser copiado
+     * Define o primeiro ponto da reta.
+     * 
+     * @param p ponto a ser definido
      */
     public void setP1(Ponto p){
         this.p1 = p;
     }
 
     /**
-     * @param p ponto a ser copiado
+     * Define o segundo ponto da reta.
+     * 
+     * @param p ponto a ser definido
      */
     public void setP2(Ponto p){
         this.p2 = p;
     }
 
     /**
+     * Retorna o primeiro ponto da reta.
+     * 
      * @return ponto p1
      */
     public Ponto getP1(){
@@ -86,6 +99,8 @@ public class Reta {
     }
 
     /**
+     * Retorna o segundo ponto da reta.
+     * 
      * @return ponto p2
      */
     public Ponto getP2(){
@@ -93,27 +108,32 @@ public class Reta {
     }
 
     /**
-     * @return valor de m da equacao: y=mx+b
+     * Calcula o coeficiente angular (m) da equacao da reta: y = mx + b.
+     * Formula: m = (y2-y1)/(x2-x1)
+     * 
+     * @return valor de m da equacao
      */
     public double calcularM(){
-        // m = (y2-y1)/(x2-x1)
         double m = (getP2().getY() - getP1().getY())/(getP2().getX() - getP1().getX());
         return m;
     }
 
     /**
-     * @return valor de b da equacao: y=mx+b
+     * Calcula o coeficiente linear (b) da equacao da reta: y = mx + b.
+     * Formula: b = y1 - mx1
+     * 
+     * @return valor de b da equacao
      */
     public double calcularB(){
-        //b = y1 - mx1
         double b = getP1().getY() - calcularM()*getP1().getX();
         return b;
     }
 
     /**
-     * Method toString
-     *
-     * @return The return value
+     * Retorna representacao em String da reta.
+     * Inclui os pontos e a equacao da reta.
+     * 
+     * @return string contendo informacoes da reta
      */
     public String toString(){
         String s = "P1: " + getP1().toString() + " P2: " + getP2().toString();
@@ -122,7 +142,8 @@ public class Reta {
     }
 
     /**
-     * Converte a reta para formato JSON
+     * Converte a reta para formato JSON.
+     * 
      * @return JSONObject representando a reta
      */
     public JSONObject toJson() {
@@ -133,7 +154,8 @@ public class Reta {
     }
 
     /**
-     * Cria uma Reta a partir de um JSONObject
+     * Cria uma Reta a partir de um JSONObject.
+     * 
      * @param json JSONObject contendo os dados da reta
      * @return novo objeto Reta
      */
@@ -144,7 +166,8 @@ public class Reta {
     }
 
     /**
-     * Cria uma lista de Retas a partir de um JSONArray
+     * Cria uma lista de Retas a partir de um JSONArray.
+     * 
      * @param jsonArray JSONArray contendo retas
      * @return lista de objetos Reta
      */
@@ -155,6 +178,4 @@ public class Reta {
         }
         return retas;
     }
-
-
 }
