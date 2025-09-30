@@ -1,9 +1,9 @@
 #BlueJ package file
-dependency1.from=TestaReta
-dependency1.to=Reta
+dependency1.from=FiguraRetas
+dependency1.to=RetaGr
 dependency1.type=UsesDependency
-dependency2.from=FiguraRetas
-dependency2.to=RetaGr
+dependency2.from=TestaReta
+dependency2.to=Reta
 dependency2.type=UsesDependency
 objectbench.height=105
 objectbench.width=760

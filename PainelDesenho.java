@@ -38,71 +38,71 @@ import org.json.JSONTokener;
 public class PainelDesenho extends JPanel implements MouseListener, MouseMotionListener {
 
     // --- Variáveis da UI e de Estado ---
-    
+
     /** Label para exibir mensagens ao usuario */
     private JLabel msg;
-    
+
     /** Tipo de primitivo atualmente selecionado */
     private TipoPrimitivo tipo = TipoPrimitivo.NENHUM;
-    
+
     /** Indica se o viewport esta ativo */
     private boolean comViewport;
-    
+
     /** Cor atual para desenho */
     private Color corAtual = Color.BLACK;
-    
+
     /** Espessura atual do traço */
     private int espessura = 1;
 
     // --- Coordenadas temporárias para desenho ---
-    
+
     /** Coordenada X do primeiro ponto */
     private int x1;
-    
+
     /** Coordenada Y do primeiro ponto */
     private int y1;
-    
+
     /** Coordenada X do segundo ponto */
     private int x2;
-    
+
     /** Coordenada Y do segundo ponto */
     private int y2;
-    
+
     /** Coordenada X do terceiro ponto */
     private int x3;
-    
+
     /** Coordenada Y do terceiro ponto */
     private int y3;
-    
+
     /** Contador de cliques do mouse */
     private int cliques = 0;
 
     // --- Estruturas de Dados para Formas e Histórico ---
-    
+
     /** Lista de formas desenhadas na tela */
     private List<Object> formas = new ArrayList<>();
-    
+
     /** Lista de formas desfeitas (para funcao refazer) */
     private List<Object> desfeitas = new ArrayList<>();
 
     /** Reta temporaria durante o desenho (feedback visual) */
     private RetaGr retaElastica = null;
-    
+
     /** Triangulo temporario durante o desenho (feedback visual) */
     private TrianguloGraf trianguloElastico = null;
-    
+
     /** Retangulo temporario durante o desenho (feedback visual) */
     private RetanguloGraf retanguloElastico = null;
-    
+
     /** Circulo temporario durante o desenho (feedback visual) */
     private CirculoGr circuloElastico = null;
-    
+
     /** Indica se esta desenhando um circulo */
     private boolean desenhandoCirculo = false;
-    
+
     /** Indica se esta desenhando um triangulo */
     private boolean desenhandoTriangulo = false;
-    
+
     /** Estado do desenho do triangulo: 0=aguardando p1, 1=aguardando p2, 2=aguardando p3 */
     private int estadoTriangulo = 0;
 
@@ -125,7 +125,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Getters e Setters ---
-    
+
     /**
      * Define o tipo de primitivo a ser desenhado.
      * 
@@ -381,7 +381,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Métodos de Controle ---
-    
+
     /**
      * Limpa toda a tela, removendo todas as formas desenhadas.
      * Reseta tambem o historico de undo/redo e coordenadas temporarias.
@@ -419,150 +419,28 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Métodos de Salvar/Carregar em JSON ---
-    
+
     /**
      * Salva todas as formas desenhadas em um arquivo JSON.
-     * Serializa cada forma com suas propriedades (coordenadas, cor, espessura).
+     * Delega a responsabilidade de serializacao para a classe jsonCoisas.
      * 
      * @param arquivo arquivo onde sera salvo o desenho
      * @throws IOException se houver erro ao escrever no arquivo
      */
     public void salvar(File arquivo) throws IOException {
-        JSONArray arrayFormas = new JSONArray();
-
-        for (Object forma : formas) {
-            JSONObject jsonForma = new JSONObject();
-
-            if (forma instanceof PontoGr) {
-                PontoGr p = (PontoGr) forma;
-                jsonForma.put("tipo", "PONTO");
-                jsonForma.put("x", p.getX());
-                jsonForma.put("y", p.getY());
-                jsonForma.put("cor", corToJson(p.getCorPto()));
-                jsonForma.put("espessura", p.getDiametro());
-
-            } else if (forma instanceof RetaGr) {
-                RetaGr r = (RetaGr) forma;
-                jsonForma.put("tipo", "RETA");
-                jsonForma.put("x1", r.p1.getX());
-                jsonForma.put("y1", r.p1.getY());
-                jsonForma.put("x2", r.p2.getX());
-                jsonForma.put("y2", r.p2.getY());
-                jsonForma.put("cor", corToJson(r.getCorReta()));
-                jsonForma.put("espessura", r.getEspReta());
-
-            } else if (forma instanceof RetanguloGraf) {
-                RetanguloGraf r = (RetanguloGraf) forma;
-                jsonForma.put("tipo", "RETANGULO");
-                jsonForma.put("x1", r.getP1().getX());
-                jsonForma.put("y1", r.getP1().getY());
-                jsonForma.put("x2", r.getP2().getX());
-                jsonForma.put("y2", r.getP2().getY());
-                jsonForma.put("cor", corToJson(r.getCor()));
-                jsonForma.put("espessura", r.getEspessura());
-
-            } else if (forma instanceof CirculoGr) {
-                CirculoGr c = (CirculoGr) forma;
-                jsonForma.put("tipo", "CIRCULO");
-                jsonForma.put("centroX", c.getCentro().getX());
-                jsonForma.put("centroY", c.getCentro().getY());
-                jsonForma.put("raio", c.getRaio());
-                jsonForma.put("cor", corToJson(c.getCorCirculo()));
-                jsonForma.put("espessura", c.getEspCirculo());
-
-            } else if (forma instanceof TrianguloGraf) {
-                TrianguloGraf t = (TrianguloGraf) forma;
-                jsonForma.put("tipo", "TRIANGULO");
-                jsonForma.put("x1", t.getP1().getX());
-                jsonForma.put("y1", t.getP1().getY());
-                jsonForma.put("x2", t.getP2().getX());
-                jsonForma.put("y2", t.getP2().getY());
-                jsonForma.put("x3", t.getP3().getX());
-                jsonForma.put("y3", t.getP3().getY());
-                jsonForma.put("cor", corToJson(t.getCor()));
-                jsonForma.put("espessura", t.getEspessura());
-            }
-
-            if (jsonForma.length() > 0) {
-                arrayFormas.put(jsonForma);
-            }
-        }
-
-        JSONObject root = new JSONObject();
-        root.put("figuras", arrayFormas);
-
-        try (FileWriter file = new FileWriter(arquivo)) {
-            file.write(root.toString(4)); // Indentação de 4 espaços
-        }
+        jsonCoisas.salvarFormasGraficas(formas, arquivo);
     }
 
     /**
      * Carrega formas de um arquivo JSON.
-     * Deserializa as formas e as adiciona ao painel de desenho.
+     * Delega a responsabilidade de desserializacao para a classe jsonCoisas.
      * 
      * @param arquivo arquivo JSON a ser carregado
      * @throws IOException se houver erro ao ler o arquivo
      */
     public void carregar(File arquivo) throws IOException {
         limparTela();
-
-        try (FileReader reader = new FileReader(arquivo)) {
-            JSONObject jsonObject = new JSONObject(new JSONTokener(reader));
-            JSONArray arrayFormas = jsonObject.getJSONArray("figuras");
-
-            for (int i = 0; i < arrayFormas.length(); i++) {
-                JSONObject jsonForma = arrayFormas.getJSONObject(i);
-                String tipo = jsonForma.getString("tipo");
-
-                if (tipo.equals("PONTO")) {
-                    double x = jsonForma.getDouble("x");
-                    double y = jsonForma.getDouble("y");
-                    Color cor = jsonToCor(jsonForma.getJSONObject("cor"));
-                    int esp = jsonForma.getInt("espessura");
-                    formas.add(new PontoGr((int)x, (int)y, cor, esp));
-
-                } else if (tipo.equals("RETA")) {
-                    double x1 = jsonForma.getDouble("x1");
-                    double y1 = jsonForma.getDouble("y1");
-                    double x2 = jsonForma.getDouble("x2");
-                    double y2 = jsonForma.getDouble("y2");
-                    Color cor = jsonToCor(jsonForma.getJSONObject("cor"));
-                    int esp = jsonForma.getInt("espessura");
-                    formas.add(new RetaGr((int)x1, (int)y1, (int)x2, (int)y2, cor, "", esp));
-
-                } else if (tipo.equals("RETANGULO")) {
-                    double x1 = jsonForma.getDouble("x1");
-                    double y1 = jsonForma.getDouble("y1");
-                    double x2 = jsonForma.getDouble("x2");
-                    double y2 = jsonForma.getDouble("y2");
-                    Color cor = jsonToCor(jsonForma.getJSONObject("cor"));
-                    int esp = jsonForma.getInt("espessura");
-                    formas.add(new RetanguloGraf(new Ponto(x1, y1), new Ponto(x2, y2), cor, esp));
-
-                } else if (tipo.equals("CIRCULO")) {
-                    double centroX = jsonForma.getDouble("centroX");
-                    double centroY = jsonForma.getDouble("centroY");
-                    double raio = jsonForma.getDouble("raio");
-                    Color cor = jsonToCor(jsonForma.getJSONObject("cor"));
-                    int esp = jsonForma.getInt("espessura");
-                    formas.add(new CirculoGr((int)centroX, (int)centroY, (int)raio, cor, "", esp));
-
-                } else if (tipo.equals("TRIANGULO")) {
-                    double x1 = jsonForma.getDouble("x1");
-                    double y1 = jsonForma.getDouble("y1");
-                    double x2 = jsonForma.getDouble("x2");
-                    double y2 = jsonForma.getDouble("y2");
-                    double x3 = jsonForma.getDouble("x3");
-                    double y3 = jsonForma.getDouble("y3");
-                    Color cor = jsonToCor(jsonForma.getJSONObject("cor"));
-                    int esp = jsonForma.getInt("espessura");
-                    Ponto p1 = new Ponto(x1, y1);
-                    Ponto p2 = new Ponto(x2, y2);
-                    Ponto p3 = new Ponto(x3, y3);
-                    formas.add(new TrianguloGraf(p1, p2, p3, cor, esp));
-                }
-            }
-        }
+        formas = jsonCoisas.carregarFormasGraficas(arquivo);
         repaint();
     }
 
@@ -594,7 +472,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
     }
 
     // --- Listeners de Mouse não utilizados ---
-    
+
     /**
      * Tratador de clique do mouse (nao utilizado).
      * 

@@ -1,46 +1,46 @@
 #BlueJ class context
 comment0.target=Reta
-comment0.text=\r\n\ Reta\ matematica.\r\n\r\n\ @author\ Julio\r\n\ @version\ 12/08/2020\r\n
+comment0.text=\r\n\ Reta\ matematica\ definida\ por\ dois\ pontos.\r\n\ Permite\ calcular\ a\ equacao\ da\ reta\ no\ formato\ y\ \=\ mx\ +\ b.\r\n\r\n\ @author\ Amora\ Marinho\ Machado\r\n\ @author\ Gabriel\ Azevedo\ Cruz\r\n\ @author\ Gabriel\ Mechi\ Lima\r\n\ @author\ Luiz\ Fernando\ de\ Marchi\ Andrade\r\n\ @version\ 05/09/2025\r\n
 comment1.params=x1\ y1\ x2\ y2
 comment1.target=Reta(int,\ int,\ int,\ int)
-comment1.text=\r\n\ Constroi\ reta\ entre\ as\ coordenadas\ x1,\ y1\ e\ x2,\ y2\ (int)\r\n\ \r\n\ @param\ x1\ coordenada\ x\ de\ p1\r\n\ @param\ y1\ coordenada\ y\ de\ p1\r\n\ @param\ x2\ coordenada\ x\ de\ p2\r\n\ @param\ y2\ coordenada\ y\ de\ p2\r\n
+comment1.text=\r\n\ Constroi\ reta\ entre\ as\ coordenadas\ x1,\ y1\ e\ x2,\ y2\ (int).\r\n\ \r\n\ @param\ x1\ coordenada\ x\ de\ p1\r\n\ @param\ y1\ coordenada\ y\ de\ p1\r\n\ @param\ x2\ coordenada\ x\ de\ p2\r\n\ @param\ y2\ coordenada\ y\ de\ p2\r\n
 comment10.params=
 comment10.target=double\ calcularB()
-comment10.text=\r\n\ @return\ valor\ de\ b\ da\ equacao\:\ y\=mx+b\r\n
+comment10.text=\r\n\ Calcula\ o\ coeficiente\ linear\ (b)\ da\ equacao\ da\ reta\:\ y\ \=\ mx\ +\ b.\r\n\ Formula\:\ b\ \=\ y1\ -\ mx1\r\n\ \r\n\ @return\ valor\ de\ b\ da\ equacao\r\n
 comment11.params=
 comment11.target=java.lang.String\ toString()
-comment11.text=\r\n\ Method\ toString\r\n\r\n\ @return\ The\ return\ value\r\n
+comment11.text=\r\n\ Retorna\ representacao\ em\ String\ da\ reta.\r\n\ Inclui\ os\ pontos\ e\ a\ equacao\ da\ reta.\r\n\ \r\n\ @return\ string\ contendo\ informacoes\ da\ reta\r\n
 comment12.params=
 comment12.target=org.json.JSONObject\ toJson()
-comment12.text=\r\n\ Converte\ a\ reta\ para\ formato\ JSON\r\n\ @return\ JSONObject\ representando\ a\ reta\r\n
+comment12.text=\r\n\ Converte\ a\ reta\ para\ formato\ JSON.\r\n\ \r\n\ @return\ JSONObject\ representando\ a\ reta\r\n
 comment13.params=json
 comment13.target=Reta\ fromJson(org.json.JSONObject)
-comment13.text=\r\n\ Cria\ uma\ Reta\ a\ partir\ de\ um\ JSONObject\r\n\ @param\ json\ JSONObject\ contendo\ os\ dados\ da\ reta\r\n\ @return\ novo\ objeto\ Reta\r\n
+comment13.text=\r\n\ Cria\ uma\ Reta\ a\ partir\ de\ um\ JSONObject.\r\n\ \r\n\ @param\ json\ JSONObject\ contendo\ os\ dados\ da\ reta\r\n\ @return\ novo\ objeto\ Reta\r\n
 comment14.params=jsonArray
 comment14.target=java.util.List\ fromJsonArray(org.json.JSONArray)
-comment14.text=\r\n\ Cria\ uma\ lista\ de\ Retas\ a\ partir\ de\ um\ JSONArray\r\n\ @param\ jsonArray\ JSONArray\ contendo\ retas\r\n\ @return\ lista\ de\ objetos\ Reta\r\n
+comment14.text=\r\n\ Cria\ uma\ lista\ de\ Retas\ a\ partir\ de\ um\ JSONArray.\r\n\ \r\n\ @param\ jsonArray\ JSONArray\ contendo\ retas\r\n\ @return\ lista\ de\ objetos\ Reta\r\n
 comment2.params=x1\ y1\ x2\ y2
 comment2.target=Reta(double,\ double,\ double,\ double)
-comment2.text=\r\n\ Constroi\ reta\ entre\ as\ coordenadas\ x1,\ y1\ e\ x2,\ y2\ (double)\r\n\ \r\n\ @param\ x1\ coordenada\ x\ de\ p1\r\n\ @param\ y1\ coordenada\ y\ de\ p1\r\n\ @param\ x2\ coordenada\ x\ de\ p2\r\n\ @param\ y2\ coordenada\ y\ de\ p2\r\n
+comment2.text=\r\n\ Constroi\ reta\ entre\ as\ coordenadas\ x1,\ y1\ e\ x2,\ y2\ (double).\r\n\ \r\n\ @param\ x1\ coordenada\ x\ de\ p1\r\n\ @param\ y1\ coordenada\ y\ de\ p1\r\n\ @param\ x2\ coordenada\ x\ de\ p2\r\n\ @param\ y2\ coordenada\ y\ de\ p2\r\n
 comment3.params=p1\ p2
 comment3.target=Reta(ponto.Ponto,\ ponto.Ponto)
-comment3.text=\r\n\ Construtor\ de\ reta\ entre\ P1\ e\ P2\r\n\ @param\ p1\ ponto\ p1\ da\ reta\r\n\ @param\ p2\ ponto\ p2\ da\ reta\r\n
+comment3.text=\r\n\ Construtor\ de\ reta\ entre\ P1\ e\ P2.\r\n\ \r\n\ @param\ p1\ ponto\ p1\ da\ reta\r\n\ @param\ p2\ ponto\ p2\ da\ reta\r\n
 comment4.params=r
 comment4.target=Reta(Reta)
-comment4.text=\r\n\ Gera\ uma\ copia\ da\ reta\r\n\ @param\ r\ reata\ ser\ copiado\r\n
+comment4.text=\r\n\ Construtor\ de\ copia.\ Gera\ uma\ copia\ da\ reta.\r\n\ \r\n\ @param\ r\ reta\ a\ ser\ copiada\r\n
 comment5.params=p
 comment5.target=void\ setP1(ponto.Ponto)
-comment5.text=\r\n\ @param\ p\ ponto\ a\ ser\ copiado\r\n
+comment5.text=\r\n\ Define\ o\ primeiro\ ponto\ da\ reta.\r\n\ \r\n\ @param\ p\ ponto\ a\ ser\ definido\r\n
 comment6.params=p
 comment6.target=void\ setP2(ponto.Ponto)
-comment6.text=\r\n\ @param\ p\ ponto\ a\ ser\ copiado\r\n
+comment6.text=\r\n\ Define\ o\ segundo\ ponto\ da\ reta.\r\n\ \r\n\ @param\ p\ ponto\ a\ ser\ definido\r\n
 comment7.params=
 comment7.target=ponto.Ponto\ getP1()
-comment7.text=\r\n\ @return\ ponto\ p1\r\n
+comment7.text=\r\n\ Retorna\ o\ primeiro\ ponto\ da\ reta.\r\n\ \r\n\ @return\ ponto\ p1\r\n
 comment8.params=
 comment8.target=ponto.Ponto\ getP2()
-comment8.text=\r\n\ @return\ ponto\ p2\r\n
+comment8.text=\r\n\ Retorna\ o\ segundo\ ponto\ da\ reta.\r\n\ \r\n\ @return\ ponto\ p2\r\n
 comment9.params=
 comment9.target=double\ calcularM()
-comment9.text=\r\n\ @return\ valor\ de\ m\ da\ equacao\:\ y\=mx+b\r\n
+comment9.text=\r\n\ Calcula\ o\ coeficiente\ angular\ (m)\ da\ equacao\ da\ reta\:\ y\ \=\ mx\ +\ b.\r\n\ Formula\:\ m\ \=\ (y2-y1)/(x2-x1)\r\n\ \r\n\ @return\ valor\ de\ m\ da\ equacao\r\n
 numComments=15
