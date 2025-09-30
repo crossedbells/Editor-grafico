@@ -212,6 +212,7 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
         if (tipo == TipoPrimitivo.PONTO) {
             formas.add(new PontoGr(e.getX(), e.getY(), getCorAtual(), getEsp()));
             desfeitas.clear();
+
         } else if (tipo == TipoPrimitivo.RETA_EQ ||
         tipo == TipoPrimitivo.RETA_MP ||
         tipo == TipoPrimitivo.RETA_LIB) {
@@ -220,10 +221,12 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             x2 = x1;
             y2 = y1;
             retaElastica = new RetaGr(x1, y1, x2, y2, corAtual, espessura);
+
         } else if (tipo == TipoPrimitivo.RETANGULO) {
             x1 = e.getX();
             y1 = e.getY();
             retanguloElastico = new RetanguloGraf(new Ponto(x1, y1), new Ponto(x1, y1), getCorAtual(), getEsp());
+
         } else if (tipo == TipoPrimitivo.CIRCULO_EQ ||
         tipo == TipoPrimitivo.CIRCULO_MP ||
         tipo == TipoPrimitivo.CIRCULO_LIB) {
@@ -231,8 +234,10 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             y1 = e.getY();
             circuloElastico = new CirculoGr(x1, y1, 0, getCorAtual(), "", getEsp());
             desenhandoCirculo = true;
+
         } else if (tipo == TipoPrimitivo.TRIANGULO) {
             if (estadoTriangulo == 0) {
+                // Primeira etapa: iniciar o triangulo
                 x1 = e.getX();
                 y1 = e.getY();
                 trianguloElastico = new TrianguloGraf(
@@ -242,21 +247,14 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                     getCorAtual(),
                     getEsp()
                 );
+                desenhandoTriangulo = true;
                 estadoTriangulo = 1;
-            } else if (estadoTriangulo == 1) {
-                x2 = e.getX();
-                y2 = e.getY();
-                trianguloElastico.atualizarP2(x2, y2);
-                trianguloElastico.atualizarP3(x2, y2);
-                estadoTriangulo = 2;
+
             } else if (estadoTriangulo == 2) {
+                // Terceira etapa: iniciar movimento do terceiro ponto
+                // (mousePressed após soltar o segundo ponto)
                 x3 = e.getX();
                 y3 = e.getY();
-                trianguloElastico.atualizarP3(x3, y3);
-                formas.add(trianguloElastico);
-                trianguloElastico = null;
-                estadoTriangulo = 0;
-                desfeitas.clear();
             }
         }
         repaint();
@@ -277,17 +275,24 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             y2 = e.getY();
             retaElastica.atualizarPontoFinal(x2, y2);
             repaint();
-        } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null) {
+
+        } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null && desenhandoTriangulo) {
             if (estadoTriangulo == 1) {
+                // Primeira etapa: arrastar p2 (base do triangulo)
                 trianguloElastico.atualizarP2(e.getX(), e.getY());
-                trianguloElastico.atualizarP3(x1, y1);
+                // p3 segue p2 (triangulo achatado até soltar)
+                trianguloElastico.atualizarP3(e.getX(), e.getY());
+
             } else if (estadoTriangulo == 2) {
+                // Segunda etapa: arrastar p3 (altura do triangulo)
                 trianguloElastico.atualizarP3(e.getX(), e.getY());
             }
             repaint();
+
         } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
             retanguloElastico.atualizarP2(e.getX(), e.getY());
             repaint();
+
         } else if ((tipo == TipoPrimitivo.CIRCULO_EQ ||
             tipo == TipoPrimitivo.CIRCULO_MP ||
             tipo == TipoPrimitivo.CIRCULO_LIB) && circuloElastico != null && desenhandoCirculo) {
@@ -312,14 +317,19 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
             retaElastica.atualizarPontoFinal(x2, y2);
             formas.add(retaElastica);
             retaElastica = null;
+            desfeitas.clear();
             repaint();
+
         } else if (tipo == TipoPrimitivo.RETANGULO && retanguloElastico != null) {
             retanguloElastico.atualizarP2(e.getX(), e.getY());
             formas.add(retanguloElastico);
             retanguloElastico = null;
             desfeitas.clear();
             repaint();
-        } else if (tipo == TipoPrimitivo.CIRCULO_EQ || tipo == TipoPrimitivo.CIRCULO_MP || tipo == TipoPrimitivo.CIRCULO_LIB) {
+
+        } else if (tipo == TipoPrimitivo.CIRCULO_EQ || 
+        tipo == TipoPrimitivo.CIRCULO_MP || 
+        tipo == TipoPrimitivo.CIRCULO_LIB) {
             if (desenhandoCirculo && circuloElastico != null) {
                 x2 = e.getX();
                 y2 = e.getY();
@@ -327,6 +337,29 @@ public class PainelDesenho extends JPanel implements MouseListener, MouseMotionL
                 formas.add(circuloElastico);
                 circuloElastico = null;
                 desenhandoCirculo = false;
+                desfeitas.clear();
+                repaint();
+            }
+
+        } else if (tipo == TipoPrimitivo.TRIANGULO && trianguloElastico != null && desenhandoTriangulo) {
+            if (estadoTriangulo == 1) {
+                // Finalizou primeira etapa: fixou p2
+                x2 = e.getX();
+                y2 = e.getY();
+                trianguloElastico.atualizarP2(x2, y2);
+                trianguloElastico.atualizarP3(x2, y2);
+                estadoTriangulo = 2; // Passa para segunda etapa
+                repaint();
+
+            } else if (estadoTriangulo == 2) {
+                // Finalizou segunda etapa: fixou p3, triangulo completo
+                x3 = e.getX();
+                y3 = e.getY();
+                trianguloElastico.atualizarP3(x3, y3);
+                formas.add(trianguloElastico);
+                trianguloElastico = null;
+                desenhandoTriangulo = false;
+                estadoTriangulo = 0; // Reset para próximo triangulo
                 desfeitas.clear();
                 repaint();
             }
